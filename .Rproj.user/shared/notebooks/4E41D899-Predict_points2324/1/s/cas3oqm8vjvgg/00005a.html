@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<style>body{background-color:white;}</style>
+<script src="lib/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="lib/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="lib/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="lib/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="lib/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="lib/kePrint-0.0.1/kePrint.js"></script>
+<link href="lib/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+</head>
+<body>
+<table class=" lightable-classic" style="font-family: Arial; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> term </th>
+   <th style="text-align:right;"> step </th>
+   <th style="text-align:right;"> estimate </th>
+   <th style="text-align:right;"> lambda </th>
+   <th style="text-align:right;"> dev.ratio </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> (Intercept) </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> -2.2840064 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> MinutesPer90 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.0633248 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> GoalsPer90 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> -0.3283132 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> GoalsContributionsPer90 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> -1.8477042 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> GoalsNoPKsPer90 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> -1.5585222 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> PctShotsOnTarget </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> -0.0026967 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> GoalsPerShot </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 15.7086978 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> GoalsPerShotOnTarget </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 11.8632968 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> MatchesPlayed </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.3325325 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> MatchesStarted </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.3771717 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> MinutesPlayed </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.0043793 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Goals </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1.1618930 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Assists </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1.3748518 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> GoalContributions </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.7794249 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> GoalsMinusPKs </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1.4779598 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Pkgoals </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 3.0377120 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Pkattempts </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1.1641141 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> YellowCards </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> -1.4328798 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> RedCards </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> -6.1490591 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> CleanSheets </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1.1343746 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Shots </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.0951766 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ShotsOnTarget </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.3446177 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> CompletePasses </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.0002017 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> PassAttempt </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.0013931 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> TotalPassDistance </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> -0.0000222 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ProgressivePassDistance </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> -0.0002066 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> CompleteShortPass </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.0005636 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ShortPassAttempt </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.0023907 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> CompleteMedPass </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> -0.0107233 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> MedPassAttempt </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> -0.0046144 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> CompleteLongPass </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.0352215 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> LongPassAttempt </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.0178106 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> AssistsMinusXA </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1.4886213 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> KeyPasses </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.1134493 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> PassFinal3rd </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> -0.0207940 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> PassPKArea </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.0706991 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> CrossPKArea </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.6914866 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Tackles </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> -0.0003357 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> TacklePossession </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.0339433 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Def3rdTackles </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> -0.0556660 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Mid3rdTackles </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.0280208 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Atk3rdTackles </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> -0.0351555 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> TackleAttempt </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.0149603 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> LostTackle </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.0220169 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> TotalBlocks </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.0523311 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ShotBlocks </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> -0.2780216 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> PassBlocks </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.0604521 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Interceptions </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> -0.1773539 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Tackle.Interception </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> -0.0277140 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Clearances </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.0888389 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ErrorsToShots </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> -2.2261517 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> NumberTouches </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.0001152 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> DefPKTouches </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> -0.0046600 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Def3rdTouches </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.0026049 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Mid3rdTouches </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> -0.0040881 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Atk3rdTouches </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.0016172 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> AtkPKTouches </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.0234868 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> LiveBallTouches </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> -0.0002632 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> AttackingTakeOn </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> -0.0138108 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> SuccessfulTakeOn </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> -0.0296808 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> TimesTackled </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> -0.0261475 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Carries </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.0011261 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> CarryDistance </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.0000116 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ProgressiveCarryDistance </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.0002842 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Atk3rdCarries </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> -0.0266044 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> AtkPKCarries </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.1027069 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Miscontrols </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.0769238 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Dispossed </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.0295905 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> OwnGoals </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> -4.8376560 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> concede2 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.5532496 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> concede4 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1.1962223 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> concede6 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> -4.5300947 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> concede8 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 27.0467674 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> SquadRank </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.8710899 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> InjuryGamesMissed </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.0016064 </td>
+   <td style="text-align:right;"> 15.68125 </td>
+   <td style="text-align:right;"> 0.9967384 </td>
+  </tr>
+</tbody>
+</table> <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [["$","$"]]}})</script><script async src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

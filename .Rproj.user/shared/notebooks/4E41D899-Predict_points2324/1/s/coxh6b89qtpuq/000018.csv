@@ -1,0 +1,4 @@
+"0","model_summary <- model_summary %>% arrange(Position, RMSE) %>%"
+"0","  mutate(Min_error=abs(Min_error)) %>%"
+"0","  mutate(across(where(is.numeric), round, digits=2))"
+"0","kbl(model_summary) %>% kable_classic(full_width=T, html_font = ""Arial"")"

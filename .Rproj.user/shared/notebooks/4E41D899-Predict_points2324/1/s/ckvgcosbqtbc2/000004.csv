@@ -1,0 +1,9 @@
+"0","trends <- outfield %>% filter(Season>2017) %>%"
+"0","  select(-c(""Season"", ""Nation"", ""Age"", ""Squad"", ""Born"")) %>%"
+"0","  group_by(Player, Position) %>% "
+"0","    summarize(across(matches(""(Per|Avg|Pct)""), mean),"
+"0","              across(-matches(""(Per|Avg|Pct)""), sum)) %>%"
+"0","  select(Player, Position, Points, Bonus, everything())"
+"1","[38;5;253m`summarise()` has grouped output by 'Player'. You can override using the `.groups`
+argument.[39m
+"

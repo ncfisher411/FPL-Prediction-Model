@@ -1,0 +1,1939 @@
+---
+title: "Predicting Fantasy Premier League Points for the 2023/24 Season"
+author: "Nick Fisher"
+date: "8/12/2023"
+output: html_document
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Points Prediction for FPL 2023/24 Season Testing a Series of Models
+
+This document attempts to perform FPL points predictions testing a series of potential models. This follows the models used by in the following analysis: https://github.com/zzhangusf/Predicting-Fantasy-Football-Points-Using-Machine-Learning
+
+
+This document will attempt to perfrom predictions of 2022/23 season statistics using data from previous seasons. This data will then be validated against actual 2022/23 accrued points.
+
+
+## Data Collection
+
+The following Github libraries were used to scrape data from Fbref and TransferMarkt for use in this model:
+
+
+* worldFootballR is used to acquire season and match-level statistics (https://jaseziv.github.io/worldfootballR/articles/extract-fbref-data.html#league-season-level-data)
+
+
+* fplscrapR is used to acquire 2022/23 FPL data for validation (https://wiscostret.github.io/fplscrapR/)
+
+Season-level data collection was divided into the following submodules by FBref and Fotmob:
+
+
+* Standard: Collection of basic season-level data such as total goals, assists, or yellow/red cards.
+
+
+* Shooting: Collection of data on shot conversion rates and expected goals or assists (xG). xG is estimated probability of scoring a goal dependent on shot creation and similar chracteristics. For more information on xG, visit the following link: https://fbref.com/en/expected-goals-model-explained/
+
+
+* Defensive Actions: Tackles, success rates, clearances, and goal-causing errors.
+
+
+* Possession: Ball retention, dribbling, and progressive carries.
+
+
+* Goalkeeping: Keeper statistics were separately evaluated as goalkeeper scoring is uniquely dependent on saves, clean sheets, and time played.
+
+
+FPL scoring data was collected from fplAnalytics, which provided proper position titles, points, 
+bonuses, and qualifying clean sheets by player (https://www.fplanalytics.com/index.html).
+
+The FiveThirtyEight Soccer Power Index (SPI) develops a ranking of teams throughout world soccer. Average SPI values by league were used to adjust values for players entering the Premier League from the Championship or other European leagues. Custom SPIs were calculated by cross-referencing these with TeamForm World rankings (https://projects.fivethirtyeight.com/soccer-predictions/global-club-rankings/, https://www.teamform.com/en/league-ranking/world).
+
+## Models used
+
+This project uses the following model types to develop an estimate for FPL points, some of which were evaluated in the previously linked Github repository:
+
+
+* OLS Regression: A standard linear regression.
+
+
+* Ridge regression: Similar to OLS, but includes a penalty to measure data that may suffer from multicolinearity. This model results in high variance that may effect accuracy of estimates.
+
+
+* Random forest regression: This model is highly useful for classification of observations by creating a series of decision trees.
+
+
+* Gradient boosting: Another decision tree-based model that improves based on previous weaker models.
+
+
+## Data exploration and trends for Models
+
+
+For season-level data, I used the WorldFootballR package to scrape statistics on standard performance, shooting, defending, possession, and keeper performance for the 2013/14 season through the 2022/23 season. It should be noted that defensive and possession data were not kept until the 2017/18 season. Due to this disparity, the model will be run for only 2017/18 to 2022/23 seasons. 
+
+
+I then used match-level data under the same package to find aggregate data points by season for clean sheets total number of games played, games in which the player was on the field for a minimum of 60 minutes, number of own goals, and instances of conceding 2 additional goals (ranging from conceding 2 to 10 goals within a match). These were joined to create one panel dataset for outfield players, and one panel dataset for keepers. 
+
+```{r ,echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
+library(rstudioapi)
+library(tidyverse)
+library(kableExtra)
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+injuries <- read.csv("submodules/injuries/injuries.csv") %>% select(-X)
+outfield <- read.csv("outfield_players.csv") %>% select(-X) %>%
+  left_join(injuries, by=c("Player"="PlayerFBref", "Season")) %>%
+  rename(InjuryGamesMissed=games_missed) 
+keepers <- read.csv("keepers.csv") %>% select(-X) %>%
+  left_join(injuries, by=c("Player"="PlayerFBref", "Season")) %>%
+  rename(InjuryGamesMissed=games_missed) 
+quietly(gc())
+```
+
+### Scoring patterns - all teams
+
+
+Creating scoring opportunities varies by player position and type. Current offensive systems have shifted towards total team football, where defenders become much more involved in offensive strategies and play whether through pressing, long-ball, inverted play, or wingback play. Defenders have become much more involved in supplying assists, particularly for top teams or in systems that cater to offensive production coming from wide areas. This reflected in the sharp spike in assists per 90 minutes for defenders in 2022, and some change in producing shots on target per 90 minutes. Because of these trends, defenders have become more valuable in securing offensive points for FPL. 
+
+
+In contrast, midfielder offensive production has slightly declined due to this evolution of play. While there are still many midfielders who have high scoring potential, or are wing forwards marked by FPL as midfielders, the abundance of midfielders who play limited or pivot roles to distribute the ball and hold the center of the field reduce offensive production. However, this implies midfielders may be more consistent in their FPL scoring, depending on team role and skill.
+
+
+Forwards tend to be the most volatile in offensive scoring output. While the still the highest FPL scorers in terms of total offensive production (as seen below), forwards total production has decreased in terms of goals and assists per 90 minutes. This is also likely due to the increased focus on "total football" tactics in the Premier League, with more fowards coming deep to set up their teammates rather than scoring the all goals themselves. There is also higher variance due to the lower number of forwards in FPL, and the drastic differences between average forwards and top strikers, such as Erling Haaland or Harry Kane. Predicting scores for forwards will likely result in high variance across the sample. 
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
+library(ggplot2)
+trends <- outfield %>% group_by(Position, Season) %>%
+  summarize(AssistsPer90=mean(AssistsPer90, na.rm=T),
+            GoalsPer90=mean(GoalsPer90, na.rm=T),
+            ShotsOnTargetPer90=mean(ShotsOnTargetPer90, na.rm=T),
+            Points=mean(Points, na.rm=T)) %>%
+  mutate(normAst=AssistsPer90/Points) %>%
+  mutate(normGls=GoalsPer90/Points) %>%
+  mutate(normShots=ShotsOnTargetPer90/Points)
+one <- ggplot(trends, aes(x=Season, y=normAst, group=Position)) +
+  geom_line(aes(color=Position)) +
+  scale_x_continuous(breaks=seq(2014,2023,by=1)) +
+  ggtitle("Assists Per 90 Minutes normalized by average points")
+two <- ggplot(trends, aes(x=Season, y=normGls, group=Position)) +
+  geom_line(aes(color=Position)) +
+  scale_x_continuous(breaks=seq(2014,2023,by=1)) +
+  ggtitle("Goals Per 90 Minutes normalized by average points")
+three <- ggplot(trends, aes(x=Season, y=normShots, group=Position)) +
+  geom_line(aes(color=Position)) +
+  scale_x_continuous(breaks=seq(2014,2023,by=1)) +
+  ggtitle("Shots on Target Per 90 Minutes normalized by average points")
+one
+two
+three
+quietly(gc())
+```
+### Statistics correlated with higher scoring
+
+This section will be broken out by position, as players will have different capacities for offesnive and defensive scoring depending on their team role and player type. It should be noted there is very little negative correlation with any of the extracted statistics. Therefore, a strict correlation criteria was used to filter variables with strong relationships, with cutoffs of 0.25 and -0.1.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
+trends <- outfield %>% filter(Season>2017) %>%
+  select(-c("Season", "Nation", "Age", "Squad", "Born")) %>%
+  group_by(Player, Position) %>% 
+    summarize(across(matches("(Per|Avg|Pct)"), mean),
+              across(-matches("(Per|Avg|Pct)"), sum)) %>%
+  select(Player, Position, Points, Bonus, everything())
+```
+
+#### Forwards
+
+
+Forwards scoring is highly correlated with offensive output and underlying statistics. While scoring and providing assists are highly correlated with improved points output, underlying statistics determining chances in the box and ability to carry the ball are also highly important. Additionally, the count of clean sheets appears to strongly inform forward performance as well, despite forwards being unable to claim points from the category. This is likely due to underlying possession that comes from being able to keep the ball away from the defensive third during clean sheet performances. This is also reflected in the high correlation coefficients associated with possession statistics in the final third.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
+library(corrplot)
+library(RColorBrewer)
+fwd <- trends %>% ungroup() %>% filter(Position=="FWD") %>%
+  select(where(~ !is.character(.x))) %>%
+  mutate_all(~ ifelse(is.na(.),0,.))
+one <- cor(fwd) %>% data.frame() %>% select(c("Points")) %>%
+  filter(Points > 0.25 | Points < 0) %>% as.matrix()
+two <- row.names(one)
+
+f_rows <- two[3:76]
+```
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+temp <- data.frame(Forward_variables=f_rows)
+temp <- kbl(temp) %>% kable_styling(bootstrap_options = c("striped", "hover"))
+temp
+```
+#### Midfielders
+
+
+Midfielders correlations tend show scoring is more dependent on consistent play time, offensive production, and clean sheets. Some underlying statistics on how midfielders affect offensive play, such as key passes or touches in the the attacking third, show some strong correlations. 
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
+mid <- trends %>% ungroup() %>% filter(Position=="MID") %>%
+  select(where(~ !is.character(.x))) %>%
+  mutate_all(~ ifelse(is.na(.),0,.))
+one <- cor(mid) %>% data.frame() %>% select(c("Points")) %>%
+  filter(Points > 0.25 | Points < 0) %>% as.matrix()
+two <- row.names(one)
+
+m_rows <- two[3:74]
+quietly(gc())
+```
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+temp <- data.frame(Midfield_variables=m_rows)
+temp <- kbl(temp) %>% kable_styling(bootstrap_options = c("striped", "hover"))
+temp
+
+```
+
+#### Defenders
+
+
+Defender performance is even less dependent on underlying defensive or possession statistics. Instead, the data shows a high correlation with playing time and ability to hold clean sheets, or concede less than 2 goals in a game. Some offensive ability is correlated, such as ability to produce shots on target and total goals and assists.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
+def<- trends %>% ungroup() %>% filter(Position=="DEF") %>%
+  select(where(~ !is.character(.x))) %>%
+  mutate_all(~ ifelse(is.na(.),0,.))
+one <- cor(def) %>% data.frame() %>% select(c("Points")) %>%
+  filter(Points > 0.25 | Points < 0) %>% as.matrix()
+two <- row.names(one)
+d_rows <- two[3:66]
+quietly(gc())
+```
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+temp <- data.frame(Defender_variables=d_rows)
+temp <- kbl(temp) %>% kable_styling(bootstrap_options = c("striped", "hover"))
+temp
+```
+
+#### Keepers
+
+Keeper scoring highly correlates with the number of minutes played and ability to both create saves and prevent goals.
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
+trends2 <- keepers %>% filter(Season>2017) %>%
+  select(-c("Season", "Nation", "Age", "Squad", "Born")) %>%
+  group_by(Player, Position) %>% 
+    summarize(across(matches("(Per|Avg|Pct)"), mean),
+              across(-matches("(Per|Avg|Pct)"), sum)) %>%
+  select(Player, Position, Points, Bonus, everything())
+
+gk <- trends2 %>% ungroup() %>% 
+  select(where(~ !is.character(.x))) %>%
+  mutate_all(~ ifelse(is.na(.),0,.))
+one <- cor(gk) %>% data.frame() %>% select(c("Points")) %>%
+  filter(Points > 0.25 | Points < 0) %>% as.matrix()
+two <- row.names(one)
+gk_rows <- two[3:77]
+quietly(gc())
+```
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+temp <- data.frame(Goalkeeper_variables=gk_rows)
+temp <- kbl(temp) %>% kable_styling(bootstrap_options = c("striped", "hover"))
+temp
+
+```
+
+# Models
+
+
+The series of regressions are detailed above. Note that these initial model runs will not show prediction results for the final year. These are results for validation and will not include the results for the 2022/23 season. See Appendix Section B for visual validation of the training models that were used for predictions.
+
+
+### OLS Regression Model
+
+
+I estimated a standard OLS regression model using 80% of data as training data.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
+set.seed(123)
+
+fwd <- trends %>% ungroup() %>% filter(Position=="FWD") %>%
+  select(all_of(c("Player", "Points")), all_of(f_rows)) %>%
+  mutate_all(~ ifelse(is.na(.),0,.))
+
+one <- sample(seq_len(nrow(fwd)), size=round(0.8*nrow(fwd)), replace = F)
+two <- setdiff(seq_len(nrow(fwd)), one)
+
+x_train <- fwd[one, ] %>% select(-Player)
+x_test <- fwd[two, ]
+temp <- x_test %>% select(Player)
+x_test <- x_test %>% select(-Player)
+
+points <- fwd %>% select(Player, Points)
+ols_fwd <- lm(Points ~ ., data=x_train)
+prediction <- predict(ols_fwd, newdata=x_test) %>% data.frame() %>%
+  rename(Predicted=1) %>% cbind(temp) %>% left_join(points, by="Player") %>%
+  mutate(Validation=Predicted-Points)
+mse <- mean((x_test$Points-prediction$Predicted)^2)
+rmse <- sqrt(mse)
+rsq <- 1-(sum((x_test$Points-prediction$Predicted)^2) / sum((x_test$Points-mean(x_test$Points))^2))
+avg_error <- mean(prediction$Validation)
+max_error <- max(prediction$Validation)
+min_error <- min(prediction$Validation)
+
+model_summary <- data.frame(MSE=mse, RMSE=rmse, `R^2`=rsq, Avg_error=avg_error,
+                            Max_error=max_error, Min_error=min_error) %>%
+  mutate(Position="FWD") %>% mutate(Model="OLS") %>%
+  select(Model, Position, everything())
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
+set.seed(123)
+
+mid <- trends %>% ungroup() %>% filter(Position=="MID") %>%
+  select(all_of(c("Player", "Points")), all_of(m_rows)) %>%
+  mutate_all(~ ifelse(is.na(.),0,.))
+
+one <- sample(seq_len(nrow(mid)), size=round(0.8*nrow(mid)), replace = F)
+two <- setdiff(seq_len(nrow(mid)), one)
+
+mid_xtrain <- mid[one, ] %>% select(-Player)
+mid_xtest <- mid[two, ]
+temp <- mid_xtest %>% select(Player)
+mid_xtest <- mid_xtest %>% select(-Player)
+
+points <- mid %>% select(Player, Points)
+ols_mid <- lm(Points ~ ., data=mid_xtrain)
+prediction <- predict(ols_mid, newdata=mid_xtest) %>% data.frame() %>%
+  rename(Predicted=1) %>% cbind(temp) %>% left_join(points, by="Player") %>%
+  mutate(Validation=Predicted-Points)
+mse <- mean((x_test$Points-prediction$Predicted)^2)
+rmse <- sqrt(mse)
+rsq <- 1-(sum((x_test$Points-prediction$Predicted)^2) / sum((x_test$Points-mean(x_test$Points))^2))
+avg_error <- mean(prediction$Validation)
+max_error <- max(prediction$Validation)
+min_error <- min(prediction$Validation)
+
+temp <- data.frame(MSE=mse, RMSE=rmse, `R^2`=rsq, Avg_error=avg_error,
+                            Max_error=max_error, Min_error=min_error) %>%
+  mutate(Position="MID") %>% mutate(Model="OLS") %>%
+  select(Model, Position, everything())
+model_summary <- model_summary %>% rbind(temp)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
+set.seed(123)
+
+def <- trends %>% ungroup() %>% filter(Position=="DEF") %>%
+  select(all_of(c("Player", "Points")), all_of(d_rows)) %>%
+  mutate_all(~ ifelse(is.na(.),0,.))
+
+one <- sample(seq_len(nrow(def)), size=round(0.8*nrow(def)), replace = F)
+two <- setdiff(seq_len(nrow(def)), one)
+
+x_train <- def[one, ] %>% select(-Player)
+x_test <- def[two, ]
+temp <- x_test %>% select(Player)
+x_test <- x_test %>% select(-Player)
+
+points <- def %>% select(Player, Points)
+ols_def <- lm(Points ~ ., data=x_train)
+prediction <- predict(ols_def, newdata=x_test) %>% data.frame() %>%
+  rename(Predicted=1) %>% cbind(temp) %>% left_join(points, by="Player") %>%
+  mutate(Validation=Predicted-Points)
+mse <- mean((x_test$Points-prediction$Predicted)^2)
+rmse <- sqrt(mse)
+rsq <- 1-(sum((x_test$Points-prediction$Predicted)^2) / sum((x_test$Points-mean(x_test$Points))^2))
+avg_error <- mean(prediction$Validation)
+max_error <- max(prediction$Validation)
+min_error <- min(prediction$Validation)
+
+temp <- data.frame(MSE=mse, RMSE=rmse, `R^2`=rsq, Avg_error=avg_error,
+                            Max_error=max_error, Min_error=min_error) %>%
+  mutate(Position="DEF") %>% mutate(Model="OLS") %>%
+  select(Model, Position, everything())
+model_summary <- model_summary %>% rbind(temp)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
+set.seed(123)
+
+gk <- trends2 %>% ungroup() %>% 
+  select(all_of(c("Player", "Points")), all_of(gk_rows)) %>%
+  mutate_all(~ ifelse(is.na(.),0,.))
+
+one <- sample(seq_len(nrow(gk)), size=round(0.8*nrow(gk)), replace = F)
+two <- setdiff(seq_len(nrow(gk)), one)
+
+x_train <- gk[one, ] %>% select(-Player)
+x_test <- gk[two, ]
+temp <- x_test %>% select(Player)
+x_test <- x_test %>% select(-Player)
+
+points <- gk %>% select(Player, Points)
+ols_gk <- lm(Points ~ ., data=x_train)
+prediction <- predict(ols_gk, newdata=x_test) %>% data.frame() %>%
+  rename(Predicted=1) %>% cbind(temp) %>% left_join(points, by="Player") %>%
+  mutate(Validation=Predicted-Points)
+mse <- mean((x_test$Points-prediction$Predicted)^2)
+rmse <- sqrt(mse)
+rsq <- 1-(sum((x_test$Points-prediction$Predicted)^2) / sum((x_test$Points-mean(x_test$Points))^2))
+avg_error <- mean(prediction$Validation)
+max_error <- max(prediction$Validation)
+min_error <- min(prediction$Validation)
+
+temp <- data.frame(MSE=mse, RMSE=rmse, `R^2`=rsq, Avg_error=avg_error,
+                            Max_error=max_error, Min_error=min_error) %>%
+  mutate(Position="GKP") %>% mutate(Model="OLS") %>%
+  select(Model, Position, everything())
+model_summary <- model_summary %>% rbind(temp)
+```
+
+### Ridge Regression Model
+
+For prediction, I subsetted 80% of data for training the machine learning model. Ridge regression requires choosing the optimal lambda values,a penalty term that shrinks coefficients to least squares. The glmnet package contains operations to automatically perform 10 k-fold validation and find the optimal lambda value. The optimal lambda, or the lambda that minimizes mean squared error, can be viewed below, along with a plot of error effects for given lambda values.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
+library(glmnet)
+library(caret)
+points <- fwd$Points %>% as.matrix()
+temp <- trends %>% ungroup() %>% filter(Position=="FWD") %>% 
+  select(-c("Points", "Bonus", "Position")) %>%
+  mutate_all(~ ifelse(is.na(.),0,.)) %>% data.matrix()
+one <- glmnet(temp, points, alpha=0)
+five <- cv.glmnet(temp, points, alpha=0)
+lambda <- five$lambda.min
+seven <- as.tibble(lambda) %>% rename(`Optimal Lambda`=value)
+print(seven)
+plot(five)
+```
+
+
+I then use the lambda value to find the optimal coefficients for the model, viewed below, along with a plot visualizing the changes in coefficient estimates as lambda approaches the optimal value. These represent the marginal effects of a 1 unit change in the predictor variable on the total number of FPL points across the given data. This process is repeated to develop the model, and the results are validated by comparing test data from this model and to actual 2023 FPL points. This validation step is completed for all models.
+
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
+library(Metrics)
+set.seed(123)
+
+fwd <- trends %>% ungroup() %>% filter(Position=="FWD") %>%
+  select(all_of(c("Player", "Points")), all_of(f_rows)) %>%
+  mutate_all(~ ifelse(is.na(.),0,.))
+
+train_index <- sample(1:nrow(fwd), nrow(fwd) * 0.8)
+train_data <- fwd[train_index, ]
+x_train <- train_data %>% select(-c("Player", "Points"))
+  
+y_train <- train_data %>% select(Points) %>% data.matrix()
+test_data <- fwd[-train_index, ]
+x_test <- test_data %>% select(-c("Player", "Points")) %>% data.matrix()
+y_test <- test_data %>% select(Points) %>% data.matrix()
+#dim(train_data)
+#dim(test_data)
+
+ridge_model <- glmnet(x_train, y_train, alpha=0, lambda = lambda)
+prediction <- predict(ridge_model, newx=x_test)
+mse <- mean((y_test-prediction)^2)
+rmse <- sqrt(mse)
+rsq <- 1-(sum((y_test-prediction)^2) / sum((y_test-mean(y_test))^2))
+
+x_test <- outfield %>% filter(Season==2023) %>% 
+  filter(Position=="FWD") %>% select(all_of(f_rows)) %>%
+  mutate_all(~ ifelse(is.na(.),0,.)) %>%
+  data.matrix()
+temp <- outfield %>% filter(Season==2023) %>%
+  filter(Position=="FWD") %>% select(Player, Points)
+prediction <- predict(ridge_model, newx=x_test) %>% data.frame() %>%
+  cbind(temp) %>% rename(Predicted=`s0`) %>% 
+  mutate(Validation=Predicted-Points)
+avg_error <- mean(prediction$Validation)
+max_error <- max(prediction$Validation)
+min_error <- min(prediction$Validation)
+
+temp <- data.frame(MSE=mse, RMSE=rmse, `R^2`=rsq, Avg_error=avg_error,
+                            Max_error=max_error, Min_error=min_error) %>%
+  mutate(Position="FWD") %>% mutate(Model="Ridge Regression") %>%
+  select(Model, Position, everything())
+model_summary <- model_summary %>% rbind(temp)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
+points <- mid$Points %>% as.matrix()
+temp <- trends %>% ungroup() %>% filter(Position=="MID") %>% 
+  select(-c("Points", "Bonus", "Position")) %>%
+  mutate_all(~ ifelse(is.na(.),0,.)) %>% data.matrix()
+one <- glmnet(temp, points, alpha=0)
+five <- cv.glmnet(temp, points, alpha=0)
+lambda <- five$lambda.min
+
+set.seed(123)
+
+mid <- trends %>% ungroup() %>% filter(Position=="MID") %>%
+  select(all_of(c("Player", "Points")), all_of(m_rows)) %>%
+  mutate_all(~ ifelse(is.na(.),0,.))
+
+train_index <- sample(1:nrow(mid), nrow(mid) * 0.8)
+train_data <- mid[train_index, ]
+x_train <- train_data %>% select(-c("Player", "Points"))
+  
+y_train <- train_data %>% select(Points) %>% data.matrix()
+test_data <- mid[-train_index, ]
+x_test <- test_data %>% select(-c("Player", "Points")) %>% data.matrix()
+y_test <- test_data %>% select(Points) %>% data.matrix()
+#dim(train_data)
+#dim(test_data)
+
+ridge_model <- glmnet(x_train, y_train, alpha=0, lambda = lambda)
+prediction <- predict(ridge_model, newx=x_test)
+mse <- mean((y_test-prediction)^2)
+rmse <- sqrt(mse)
+rsq <- 1-(sum((y_test-prediction)^2) / sum((y_test-mean(y_test))^2))
+
+x_test <- outfield %>% filter(Season==2023) %>% 
+  filter(Position=="MID") %>% select(all_of(m_rows)) %>%
+  mutate_all(~ ifelse(is.na(.),0,.)) %>%
+  data.matrix()
+temp <- outfield %>% filter(Season==2023) %>%
+  filter(Position=="MID") %>% select(Player, Points)
+prediction <- predict(ridge_model, newx=x_test) %>% data.frame() %>%
+  cbind(temp) %>% rename(Predicted=`s0`) %>% 
+  mutate(Validation=Predicted-Points)
+avg_error <- mean(prediction$Validation)
+max_error <- max(prediction$Validation)
+min_error <- min(prediction$Validation)
+
+temp <- data.frame(MSE=mse, RMSE=rmse, `R^2`=rsq, Avg_error=avg_error,
+                            Max_error=max_error, Min_error=min_error) %>%
+  mutate(Position="MID") %>% mutate(Model="Ridge Regression") %>%
+  select(Model, Position, everything())
+model_summary <- model_summary %>% rbind(temp)
+
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
+points <- def$Points %>% as.matrix()
+temp <- trends %>% ungroup() %>% filter(Position=="DEF") %>% 
+  select(-c("Points", "Bonus", "Position")) %>%
+  mutate_all(~ ifelse(is.na(.),0,.)) %>% data.matrix()
+one <- glmnet(temp, points, alpha=0)
+five <- cv.glmnet(temp, points, alpha=0)
+lambda <- five$lambda.min
+
+set.seed(123)
+
+def <- trends %>% ungroup() %>% filter(Position=="DEF") %>%
+  select(all_of(c("Player", "Points")), all_of(d_rows)) %>%
+  mutate_all(~ ifelse(is.na(.),0,.))
+
+train_index <- sample(1:nrow(def), nrow(def) * 0.8)
+train_data <- def[train_index, ]
+x_train <- train_data %>% select(-c("Player", "Points"))
+  
+y_train <- train_data %>% select(Points) %>% data.matrix()
+test_data <- def[-train_index, ]
+x_test <- test_data %>% select(-c("Player", "Points")) %>% data.matrix()
+y_test <- test_data %>% select(Points) %>% data.matrix()
+#dim(train_data)
+#dim(test_data)
+
+ridge_model <- glmnet(x_train, y_train, alpha=0, lambda = lambda)
+prediction <- predict(ridge_model, newx=x_test)
+mse <- mean((y_test-prediction)^2)
+rmse <- sqrt(mse)
+rsq <- 1-(sum((y_test-prediction)^2) / sum((y_test-mean(y_test))^2))
+
+x_test <- outfield %>% filter(Season==2023) %>% 
+  filter(Position=="DEF") %>% select(all_of(d_rows)) %>%
+  mutate_all(~ ifelse(is.na(.),0,.)) %>%
+  data.matrix()
+temp <- outfield %>% filter(Season==2023) %>%
+  filter(Position=="DEF") %>% select(Player, Points)
+prediction <- predict(ridge_model, newx=x_test) %>% data.frame() %>%
+  cbind(temp) %>% rename(Predicted=`s0`) %>% 
+  mutate(Validation=Predicted-Points)
+avg_error <- mean(prediction$Validation)
+max_error <- max(prediction$Validation)
+min_error <- min(prediction$Validation)
+
+temp <- data.frame(MSE=mse, RMSE=rmse, `R^2`=rsq, Avg_error=avg_error,
+                            Max_error=max_error, Min_error=min_error) %>%
+  mutate(Position="DEF") %>% mutate(Model="Ridge Regression") %>%
+  select(Model, Position, everything())
+model_summary <- model_summary %>% rbind(temp)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
+points <- gk$Points %>% as.matrix()
+temp <- trends2 %>% ungroup() %>%
+  select(-c("Points", "Bonus", "Position")) %>%
+  mutate_all(~ ifelse(is.na(.),0,.)) %>% data.matrix()
+one <- glmnet(temp, points, alpha=0)
+five <- cv.glmnet(temp, points, alpha=0)
+lambda <- five$lambda.min
+
+set.seed(123)
+
+gk <- trends2 %>% ungroup() %>% 
+  select(all_of(c("Player", "Points")), all_of(gk_rows)) %>%
+  mutate_all(~ ifelse(is.na(.),0,.))
+
+train_index <- sample(1:nrow(gk), nrow(gk) * 0.8)
+train_data <- gk[train_index, ]
+x_train <- train_data %>% select(-c("Player", "Points"))
+  
+y_train <- train_data %>% select(Points) %>% data.matrix()
+test_data <- gk[-train_index, ]
+x_test <- test_data %>% select(-c("Player", "Points")) %>% data.matrix()
+y_test <- test_data %>% select(Points) %>% data.matrix()
+#dim(train_data)
+#dim(test_data)
+
+ridge_model <- glmnet(x_train, y_train, alpha=0, lambda = lambda)
+prediction <- predict(ridge_model, newx=x_test)
+mse <- mean((y_test-prediction)^2)
+rmse <- sqrt(mse)
+rsq <- 1-(sum((y_test-prediction)^2) / sum((y_test-mean(y_test))^2))
+
+x_test <- keepers %>% filter(Season==2023) %>% 
+  select(all_of(gk_rows)) %>%
+  mutate_all(~ ifelse(is.na(.),0,.)) %>%
+  data.matrix()
+temp <- keepers %>% filter(Season==2023) %>%
+  select(Player, Points)
+prediction <- predict(ridge_model, newx=x_test) %>% data.frame() %>%
+  cbind(temp) %>% rename(Predicted=`s0`) %>% 
+  mutate(Validation=Predicted-Points)
+avg_error <- mean(prediction$Validation)
+max_error <- max(prediction$Validation)
+min_error <- min(prediction$Validation)
+
+temp <- data.frame(MSE=mse, RMSE=rmse, `R^2`=rsq, Avg_error=avg_error,
+                            Max_error=max_error, Min_error=min_error) %>%
+  mutate(Position="GKP") %>% mutate(Model="Ridge Regression") %>%
+  select(Model, Position, everything())
+model_summary <- model_summary %>% rbind(temp)
+```
+
+### Random Forest model
+
+
+The random forest model follows a similar data split as the ridge regression model with 80% for training. This model requires a greater degree of calibration due to needing to specify the number of decision trees in the model. The number of trees is determined by the user and does not cause overfitting.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
+library(randomForest)
+set.seed(123)
+
+train_index <- sample(1:nrow(fwd), nrow(fwd) * 0.8)
+train_data <- fwd[train_index, ]
+x_train <- train_data %>% select(-c("Player"))
+  
+y_train <- train_data %>% select(Points) %>% data.matrix()
+test_data <- fwd[-train_index, ]
+x_test <- test_data %>% select(-c("Player")) %>% data.matrix()
+y_test <- test_data %>% select(Points) %>% data.matrix()
+#dim(train_data)
+#dim(test_data)
+
+#tr_control <- trainControl(method = "repeatedcv", number = 10, repeats=3, search = "grid")
+#model <- train(Points~., data = x_train, method = "rf", trControl = tr_control, ntree=100)
+#print(model)
+#best mtry=70
+tr_control <- trainControl(method = "repeatedcv", number = 10, repeats=3, search = "random")
+#model <- train(Points~., data = x_train, method = "rf", trControl = tr_control, ntree=100)
+#print(model)
+# Best is random, mtry=60
+tunegrid <- expand.grid(.mtry=60)
+
+#one <- list()
+#for (maxnodes in c(5:15)){
+#  set.seed(123)
+#  rf_maxnode <- train(Points~., data=x_train, method="rf", tuneGrid=tunegrid,
+#                      trControl=tr_control, importance=T, nodesize=14,
+#                      maxnodes=maxnodes, ntree=100)
+#  current_iteration <- toString(maxnodes)
+#  one[[current_iteration]] <- rf_maxnode
+#}
+#two <- resamples(one)
+#summary(two)
+# best maxnodes is 14
+
+#three <- list()
+#for(ntree in c(50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700)) {
+#  set.seed(123)
+#  rf_maxtrees <- train(Points~., data=x_train, method="rf", tuneGrid=tunegrid,
+#                       trControl=tr_control, importance=T, nodesize=14,
+#                       maxnodes=14, ntree=ntree)
+#  key <- toString(ntree)
+#  three[[key]] <- rf_maxtrees
+#}
+#four <- resamples(three)
+#summary(four)
+# best trees is 150
+rf_model <- train(Points~., data = x_train, method = "rf", tuneGrid=tunegrid,
+              trControl=tr_control, importance=T, nodesize=14, ntree=150,
+              maxnodes=14)
+
+prediction <- predict(rf_model, x_test)
+mse <- mean((y_test-prediction)^2)
+rmse <- sqrt(mse)
+rsq <- 1-(sum((y_test-prediction)^2) / sum((y_test-mean(y_test))^2))
+
+x_test <- outfield %>% filter(Season==2023) %>% 
+  filter(Position=="FWD") %>% select(all_of(f_rows)) %>%
+  mutate_all(~ ifelse(is.na(.),0,.)) %>%
+  data.matrix()
+temp <- outfield %>% filter(Season==2023) %>%
+  filter(Position=="FWD") %>% select(Player, Points)
+prediction <- predict(rf_model, x_test) %>% data.frame() %>% 
+  rename(Predicted=1) %>% cbind(temp) %>% 
+  mutate(Validation=Predicted-Points)
+avg_error <- mean(prediction$Validation)
+min_error <- min(prediction$Validation)
+max_error <- max(prediction$Validation)
+
+temp <- data.frame(MSE=mse, RMSE=rmse, `R^2`=rsq, Avg_error=avg_error,
+                            Max_error=max_error, Min_error=min_error) %>%
+  mutate(Position="FWD") %>% mutate(Model="Random Forest") %>%
+  select(Model, Position, everything())
+model_summary <- model_summary %>% rbind(temp)
+  
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
+set.seed(123)
+
+train_index <- sample(1:nrow(mid), nrow(mid) * 0.8)
+train_data <- mid[train_index, ]
+x_train <- train_data %>% select(-c("Player"))
+  
+y_train <- train_data %>% select(Points) %>% data.matrix()
+test_data <- mid[-train_index, ]
+x_test <- test_data %>% select(-c("Player")) %>% data.matrix()
+y_test <- test_data %>% select(Points) %>% data.matrix()
+#dim(train_data)
+#dim(test_data)
+
+#tr_control <- trainControl(method = "repeatedcv", number = 10, repeats=3, search = "grid")
+#model <- train(Points~., data = x_train, method = "rf", trControl = tr_control, ntree=100)
+#print(model)
+#best mtry=35
+tr_control <- trainControl(method = "repeatedcv", number = 10, repeats=3, search = "random")
+#model <- train(Points~., data = x_train, method = "rf", trControl = tr_control, ntree=100)
+#print(model)
+# Best is random, mtry=14
+tunegrid <- expand.grid(.mtry=14)
+
+#one <- list()
+#for (maxnodes in c(15:25)){
+#  set.seed(123)
+#  rf_maxnode <- train(Points~., data=x_train, method="rf", tuneGrid=tunegrid,
+#                      trControl=tr_control, importance=T, nodesize=14,
+#                      maxnodes=maxnodes, ntree=100)
+#  current_iteration <- toString(maxnodes)
+#  one[[current_iteration]] <- rf_maxnode
+#}
+#two <- resamples(one)
+#summary(two)
+# best maxnodes is 20
+
+#three <- list()
+#for(ntree in c(50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700)) {
+#  set.seed(123)
+#  rf_maxtrees <- train(Points~., data=x_train, method="rf", tuneGrid=tunegrid,
+#                       trControl=tr_control, importance=T, nodesize=14,
+#                       maxnodes=20, ntree=ntree)
+#  key <- toString(ntree)
+#  three[[key]] <- rf_maxtrees
+#}
+#four <- resamples(three)
+#summary(four)
+# best trees is 150
+rf_model <- train(Points~., data = x_train, method = "rf", tuneGrid=tunegrid,
+              trControl=tr_control, importance=T, nodesize=14, ntree=150,
+              maxnodes=20)
+
+prediction <- predict(rf_model, x_test)
+mse <- mean((y_test-prediction)^2)
+rmse <- sqrt(mse)
+rsq <- 1-(sum((y_test-prediction)^2) / sum((y_test-mean(y_test))^2))
+
+x_test <- outfield %>% filter(Season==2023) %>% 
+  filter(Position=="MID") %>% select(all_of(m_rows)) %>%
+  mutate_all(~ ifelse(is.na(.),0,.)) %>%
+  data.matrix()
+temp <- outfield %>% filter(Season==2023) %>%
+  filter(Position=="MID") %>% select(Player, Points)
+prediction <- predict(rf_model, x_test) %>% data.frame() %>% 
+  rename(Predicted=1) %>% cbind(temp) %>% 
+  mutate(Validation=Predicted-Points)
+avg_error <- mean(prediction$Validation)
+min_error <- min(prediction$Validation)
+max_error <- max(prediction$Validation)
+
+temp <- data.frame(MSE=mse, RMSE=rmse, `R^2`=rsq, Avg_error=avg_error,
+                            Max_error=max_error, Min_error=min_error) %>%
+  mutate(Position="MID") %>% mutate(Model="Random Forest") %>%
+  select(Model, Position, everything())
+model_summary <- model_summary %>% rbind(temp)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
+set.seed(123)
+
+train_index <- sample(1:nrow(def), nrow(def) * 0.8)
+train_data <- def[train_index, ]
+x_train <- train_data %>% select(-c("Player"))
+  
+y_train <- train_data %>% select(Points) %>% data.matrix()
+test_data <- def[-train_index, ]
+x_test <- test_data %>% select(-c("Player")) %>% data.matrix()
+y_test <- test_data %>% select(Points) %>% data.matrix()
+#dim(train_data)
+#dim(test_data)
+
+#tr_control <- trainControl(method = "repeatedcv", number = 10, repeats=3, search = "grid")
+#model <- train(Points~., data = x_train, method = "rf", trControl = tr_control, ntree=100)
+#print(model)
+#best mtry=60
+tr_control <- trainControl(method = "repeatedcv", number = 10, repeats=3, search = "random")
+#model <- train(Points~., data = x_train, method = "rf", trControl = tr_control, ntree=100)
+#print(model)
+# Best is random, mtry=50
+tunegrid <- expand.grid(.mtry=50)
+
+#one <- list()
+#for (maxnodes in c(5:15)){
+#  set.seed(123)
+#  rf_maxnode <- train(Points~., data=x_train, method="rf", tuneGrid=tunegrid,
+#                      trControl=tr_control, importance=T, nodesize=14,
+#                      maxnodes=maxnodes, ntree=100)
+#  current_iteration <- toString(maxnodes)
+#  one[[current_iteration]] <- rf_maxnode
+#}
+#two <- resamples(one)
+#summary(two)
+# best maxnodes is 12
+
+#three <- list()
+#for(ntree in c(50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700)) {
+#  set.seed(123)
+#  rf_maxtrees <- train(Points~., data=x_train, method="rf", tuneGrid=tunegrid,
+#                       trControl=tr_control, importance=T, nodesize=14,
+#                       maxnodes=12, ntree=ntree)
+#  key <- toString(ntree)
+#  three[[key]] <- rf_maxtrees
+#}
+#four <- resamples(three)
+#summary(four)
+# best trees is 150
+rf_model <- train(Points~., data = x_train, method = "rf", tuneGrid=tunegrid,
+              trControl=tr_control, importance=T, nodesize=14, ntree=150,
+              maxnodes=12)
+
+prediction <- predict(rf_model, x_test)
+mse <- mean((y_test-prediction)^2)
+rmse <- sqrt(mse)
+rsq <- 1-(sum((y_test-prediction)^2) / sum((y_test-mean(y_test))^2))
+
+x_test <- outfield %>% filter(Season==2023) %>% 
+  filter(Position=="DEF") %>% select(all_of(d_rows)) %>%
+  mutate_all(~ ifelse(is.na(.),0,.)) %>%
+  data.matrix()
+temp <- outfield %>% filter(Season==2023) %>%
+  filter(Position=="DEF") %>% select(Player, Points)
+prediction <- predict(rf_model, x_test) %>% data.frame() %>% 
+  rename(Predicted=1) %>% cbind(temp) %>% 
+  mutate(Validation=Predicted-Points)
+avg_error <- mean(prediction$Validation)
+min_error <- min(prediction$Validation)
+max_error <- max(prediction$Validation)
+
+temp <- data.frame(MSE=mse, RMSE=rmse, `R^2`=rsq, Avg_error=avg_error,
+                            Max_error=max_error, Min_error=min_error) %>%
+  mutate(Position="DEF") %>% mutate(Model="Random Forest") %>%
+  select(Model, Position, everything())
+model_summary <- model_summary %>% rbind(temp)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
+set.seed(123)
+
+train_index <- sample(1:nrow(gk), nrow(gk) * 0.8)
+train_data <- gk[train_index, ]
+x_train <- train_data %>% select(-c("Player"))
+  
+y_train <- train_data %>% select(Points) %>% data.matrix()
+test_data <- gk[-train_index, ]
+x_test <- test_data %>% select(-c("Player")) %>% data.matrix()
+y_test <- test_data %>% select(Points) %>% data.matrix()
+#dim(train_data)
+#dim(test_data)
+
+#tr_control <- trainControl(method = "repeatedcv", number = 10, repeats=3, search = "grid")
+#model <- train(Points~., data = x_train, method = "rf", trControl = tr_control, ntree=100)
+#print(model)
+#best mtry=31
+tr_control <- trainControl(method = "repeatedcv", number = 10, repeats=3, search = "random")
+#model <- train(Points~., data = x_train, method = "rf", trControl = tr_control, ntree=100)
+#print(model)
+# Best is random, mtry=41
+tunegrid <- expand.grid(.mtry=41)
+
+#one <- list()
+#for (maxnodes in c(5:15)){
+#  set.seed(123)
+#  rf_maxnode <- train(Points~., data=x_train, method="rf", tuneGrid=tunegrid,
+#                      trControl=tr_control, importance=T, nodesize=14,
+#                      maxnodes=maxnodes, ntree=100)
+#  current_iteration <- toString(maxnodes)
+#  one[[current_iteration]] <- rf_maxnode
+#}
+#two <- resamples(one)
+#summary(two)
+# best maxnodes is 9
+
+#three <- list()
+#for(ntree in c(50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700)) {
+#  set.seed(123)
+#  rf_maxtrees <- train(Points~., data=x_train, method="rf", tuneGrid=tunegrid,
+#                       trControl=tr_control, importance=T, nodesize=14,
+#                       maxnodes=9, ntree=ntree)
+#  key <- toString(ntree)
+#  three[[key]] <- rf_maxtrees
+#}
+#four <- resamples(three)
+#summary(four)
+# best trees is 200
+
+rf_model <- train(Points~., data = x_train, method = "rf", tuneGrid=tunegrid,
+              trControl=tr_control, importance=T, nodesize=14, ntree=200,
+              maxnodes=12)
+
+prediction <- predict(rf_model, x_test)
+mse <- mean((y_test-prediction)^2)
+rmse <- sqrt(mse)
+rsq <- 1-(sum((y_test-prediction)^2) / sum((y_test-mean(y_test))^2))
+
+x_test <- keepers %>% filter(Season==2023) %>% 
+  select(all_of(gk_rows)) %>%
+  mutate_all(~ ifelse(is.na(.),0,.)) %>%
+  data.matrix()
+temp <- keepers %>% filter(Season==2023) %>%
+  select(Player, Points)
+prediction <- predict(rf_model, x_test) %>% data.frame() %>% 
+  rename(Predicted=1) %>% cbind(temp) %>% 
+  mutate(Validation=Predicted-Points)
+avg_error <- mean(prediction$Validation)
+min_error <- min(prediction$Validation)
+max_error <- max(prediction$Validation)
+
+temp <- data.frame(MSE=mse, RMSE=rmse, `R^2`=rsq, Avg_error=avg_error,
+                            Max_error=max_error, Min_error=min_error) %>%
+  mutate(Position="GKP") %>% mutate(Model="Random Forest") %>%
+  select(Model, Position, everything())
+model_summary <- model_summary %>% rbind(temp)
+```
+
+### Gradient Boosting model
+
+
+GBM is designed to improve upon previous decision trees rather than create independent trees. These trees can be boosted to have higher predictive power.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
+library(gbm)
+set.seed(123)
+
+train_index <- sample(1:nrow(fwd), nrow(fwd) * 0.8)
+train_data <- fwd[train_index, ]
+x_train <- train_data %>% select(-c("Player"))
+  
+y_train <- train_data %>% select(Points) %>% data.matrix()
+test_data <- fwd[-train_index, ]
+x_test <- test_data %>% select(-c("Player")) %>% data.frame()
+y_test <- test_data %>% select(Points) %>% data.matrix()
+#dim(train_data)
+#dim(test_data)
+
+#tunegrid <- expand.grid(learning_rate=c(0.3, 0.1, 0.05, 0.01, 0.005),
+#                        RMSE=NA, trees=NA, time=NA)
+
+#for(i in seq_len(nrow(tunegrid))) {
+#  set.seed(123)
+#  one <- system.time({
+#    m <- gbm(Points~., data=x_train, distribution="gaussian", n.trees=5000,
+#             shrinkage = tunegrid$learning_rate[i],
+#             interaction.depth=3, n.minobsinnode=10, cv.folds=10)
+#  })
+#  tunegrid$RMSE[i] <- sqrt(min(m$cv.error))
+#  tunegrid$trees[i] <- which.min(m$cv.error)
+#  tunegrid$Time[i] <- one[["elapsed"]]
+#}
+# 1374 trees is optimal
+
+gbm_model <- gbm(Points~., data = x_train, distribution = "gaussian",
+            n.trees=1374, shrinkage=0.005, interaction.depth = 3,
+            n.minobsinnode = 10, cv.folds = 10)
+
+prediction <- predict(gbm_model, x_test)
+mse <- mean((y_test-prediction)^2)
+rmse <- sqrt(mse)
+rsq <- 1-(sum((y_test-prediction)^2) / sum((y_test-mean(y_test))^2))
+
+x_test <- outfield %>% filter(Season==2023) %>% 
+  filter(Position=="FWD") %>% select(all_of(f_rows)) %>%
+  mutate_all(~ ifelse(is.na(.),0,.)) %>%
+  data.frame()
+temp <- outfield %>% filter(Season==2023) %>%
+  filter(Position=="FWD") %>% select(Player, Points)
+prediction <- predict(gbm_model, x_test) %>% data.frame() %>% 
+  rename(Predicted=1) %>% cbind(temp) %>% 
+  mutate(Validation=Predicted-Points)
+avg_error <- mean(prediction$Validation)
+min_error <- min(prediction$Validation)
+max_error <- max(prediction$Validation)
+
+temp <- data.frame(MSE=mse, RMSE=rmse, `R^2`=rsq, Avg_error=avg_error,
+                            Max_error=max_error, Min_error=min_error) %>%
+  mutate(Position="FWD") %>% mutate(Model="Gradient Boosting") %>%
+  select(Model, Position, everything())
+model_summary <- model_summary %>% rbind(temp)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
+set.seed(123)
+
+train_index <- sample(1:nrow(mid), nrow(mid) * 0.8)
+train_data <- mid[train_index, ]
+x_train <- train_data %>% select(-c("Player"))
+  
+y_train <- train_data %>% select(Points) %>% data.matrix()
+test_data <- mid[-train_index, ]
+x_test <- test_data %>% select(-c("Player")) %>% data.frame()
+y_test <- test_data %>% select(Points) %>% data.matrix()
+#dim(train_data)
+#dim(test_data)
+
+#tunegrid <- expand.grid(learning_rate=c(0.3, 0.1, 0.05, 0.01, 0.005),
+#                        RMSE=NA, trees=NA, time=NA)
+
+#for(i in seq_len(nrow(tunegrid))) {
+#  set.seed(123)
+#  one <- system.time({
+#    m <- gbm(Points~., data=x_train, distribution="gaussian", n.trees=5000,
+#             shrinkage = tunegrid$learning_rate[i],
+#             interaction.depth=3, n.minobsinnode=10, cv.folds=10)
+#  })
+#  tunegrid$RMSE[i] <- sqrt(min(m$cv.error))
+#  tunegrid$trees[i] <- which.min(m$cv.error)
+#  tunegrid$Time[i] <- one[["elapsed"]]
+#}
+# 541 trees is optimal
+
+gbm_model <- gbm(Points~., data = x_train, distribution = "gaussian",
+            n.trees=541, shrinkage=0.05, interaction.depth = 3,
+            n.minobsinnode = 10, cv.folds = 10)
+
+prediction <- predict(gbm_model, x_test)
+mse <- mean((y_test-prediction)^2)
+rmse <- sqrt(mse)
+rsq <- 1-(sum((y_test-prediction)^2) / sum((y_test-mean(y_test))^2))
+
+x_test <- outfield %>% filter(Season==2023) %>% 
+  filter(Position=="MID") %>% select(all_of(m_rows)) %>%
+  mutate_all(~ ifelse(is.na(.),0,.)) %>%
+  data.frame()
+temp <- outfield %>% filter(Season==2023) %>%
+  filter(Position=="MID") %>% select(Player, Points)
+prediction <- predict(gbm_model, x_test) %>% data.frame() %>% 
+  rename(Predicted=1) %>% cbind(temp) %>% 
+  mutate(Validation=Predicted-Points)
+avg_error <- mean(prediction$Validation)
+min_error <- min(prediction$Validation)
+max_error <- max(prediction$Validation)
+
+temp <- data.frame(MSE=mse, RMSE=rmse, `R^2`=rsq, Avg_error=avg_error,
+                            Max_error=max_error, Min_error=min_error) %>%
+  mutate(Position="MID") %>% mutate(Model="Gradient Boosting") %>%
+  select(Model, Position, everything())
+model_summary <- model_summary %>% rbind(temp)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
+set.seed(123)
+
+train_index <- sample(1:nrow(def), nrow(def) * 0.8)
+train_data <- def[train_index, ]
+x_train <- train_data %>% select(-c("Player"))
+  
+y_train <- train_data %>% select(Points) %>% data.matrix()
+test_data <- def[-train_index, ]
+x_test <- test_data %>% select(-c("Player")) %>% data.frame()
+y_test <- test_data %>% select(Points) %>% data.matrix()
+#dim(train_data)
+#dim(test_data)
+
+#tunegrid <- expand.grid(learning_rate=c(0.3, 0.1, 0.05, 0.01, 0.005),
+#                        RMSE=NA, trees=NA, time=NA)
+
+#for(i in seq_len(nrow(tunegrid))) {
+#  set.seed(123)
+#  one <- system.time({
+#    m <- gbm(Points~., data=x_train, distribution="gaussian", n.trees=5000,
+#             shrinkage = tunegrid$learning_rate[i],
+#             interaction.depth=3, n.minobsinnode=10, cv.folds=10)
+#  })
+#  tunegrid$RMSE[i] <- sqrt(min(m$cv.error))
+#  tunegrid$trees[i] <- which.min(m$cv.error)
+#  tunegrid$Time[i] <- one[["elapsed"]]
+#}
+# 1374 trees is optimal
+
+gbm_model <- gbm(Points~., data = x_train, distribution = "gaussian",
+            n.trees=1374, shrinkage=0.05, interaction.depth = 3,
+            n.minobsinnode = 10, cv.folds = 10)
+
+prediction <- predict(gbm_model, x_test)
+mse <- mean((y_test-prediction)^2)
+rmse <- sqrt(mse)
+rsq <- 1-(sum((y_test-prediction)^2) / sum((y_test-mean(y_test))^2))
+
+x_test <- outfield %>% filter(Season==2023) %>% 
+  filter(Position=="DEF") %>% select(all_of(d_rows)) %>%
+  mutate_all(~ ifelse(is.na(.),0,.)) %>%
+  data.frame()
+temp <- outfield %>% filter(Season==2023) %>%
+  filter(Position=="DEF") %>% select(Player, Points)
+prediction <- predict(gbm_model, x_test) %>% data.frame() %>% 
+  rename(Predicted=1) %>% cbind(temp) %>% 
+  mutate(Validation=Predicted-Points)
+avg_error <- mean(prediction$Validation)
+min_error <- min(prediction$Validation)
+max_error <- max(prediction$Validation)
+
+temp <- data.frame(MSE=mse, RMSE=rmse, `R^2`=rsq, Avg_error=avg_error,
+                            Max_error=max_error, Min_error=min_error) %>%
+  mutate(Position="DEF") %>% mutate(Model="Gradient Boosting") %>%
+  select(Model, Position, everything())
+model_summary <- model_summary %>% rbind(temp)
+
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
+set.seed(123)
+
+train_index <- sample(1:nrow(gk), nrow(gk) * 0.8)
+train_data <- gk[train_index, ]
+x_train <- train_data %>% select(-c("Player"))
+  
+y_train <- train_data %>% select(Points) %>% data.matrix()
+test_data <- gk[-train_index, ]
+x_test <- test_data %>% select(-c("Player")) %>% data.frame()
+y_test <- test_data %>% select(Points) %>% data.matrix()
+#dim(train_data)
+#dim(test_data)
+
+#tunegrid <- expand.grid(learning_rate=c(0.3, 0.1, 0.05, 0.01, 0.005),
+#                        RMSE=NA, trees=NA, time=NA)
+
+#for(i in seq_len(nrow(tunegrid))) {
+#  set.seed(123)
+#  one <- system.time({
+#    m <- gbm(Points~., data=x_train, distribution="gaussian", n.trees=5000,
+#             shrinkage = tunegrid$learning_rate[i],
+#             interaction.depth=3, n.minobsinnode=10, cv.folds=10)
+#  })
+#  tunegrid$RMSE[i] <- sqrt(min(m$cv.error))
+#  tunegrid$trees[i] <- which.min(m$cv.error)
+#  tunegrid$Time[i] <- one[["elapsed"]]
+#}
+# 4937 trees is optimal
+
+gbm_model <- gbm(Points~., data = x_train, distribution = "gaussian",
+            n.trees=4937, shrinkage=0.1, interaction.depth = 3,
+            n.minobsinnode = 10, cv.folds = 10)
+
+prediction <- predict(gbm_model, x_test)
+mse <- mean((y_test-prediction)^2)
+rmse <- sqrt(mse)
+rsq <- 1-(sum((y_test-prediction)^2) / sum((y_test-mean(y_test))^2))
+
+x_test <- keepers %>% filter(Season==2023) %>% 
+  select(all_of(gk_rows)) %>%
+  mutate_all(~ ifelse(is.na(.),0,.)) %>%
+  data.frame()
+temp <- keepers %>% filter(Season==2023) %>%
+  select(Player, Points)
+prediction <- predict(gbm_model, x_test) %>% data.frame() %>% 
+  rename(Predicted=1) %>% cbind(temp) %>% 
+  mutate(Validation=Predicted-Points)
+avg_error <- mean(prediction$Validation)
+min_error <- min(prediction$Validation)
+max_error <- max(prediction$Validation)
+
+temp <- data.frame(MSE=mse, RMSE=rmse, `R^2`=rsq, Avg_error=avg_error,
+                            Max_error=max_error, Min_error=min_error) %>%
+  mutate(Position="GKP") %>% mutate(Model="Gradient Boosting") %>%
+  select(Model, Position, everything())
+model_summary <- model_summary %>% rbind(temp)
+
+```
+
+The results below show model performance for ridge regressions with the following statistics:
+
+
+* R-squared (R^2): Indicates "goodness of fit" for a model, or asses how much variation the model captures.
+
+
+* Mean squared error (MSE): Measures how well a model fits by determining the average square distance from the true data estimates.
+
+
+* Root mean squared error (RMSE): Measures the difference between values that are predicted in the model and the actual values.
+
+
+* Average error: The average value of the true difference between acutal points scored in the 2023 season and the predicted points given their season statistics.
+
+
+* Minimum and maximum error: The minimum and maximum values for differences between predicted points for the 2023 season and actual points. 
+
+
+The following models performed best by respective position:
+
+
+* Forwards: Ridge regression minimized average errors while keeping a low RMSE, slightly outperforming OLS.
+
+
+* Midfielders: The OLS model performed much better across all metrics than other models.
+
+
+* Defenders: Ridge regression was second best in RMSE, but minimized average error in comparison to OLS.
+
+
+* Goalkeepers: Error margins were much higher across all metrics. The random forest model minimized RMSE.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+model_summary <- model_summary %>% arrange(Position, RMSE) %>%
+  mutate(Min_error=abs(Min_error)) %>%
+  mutate(across(where(is.numeric), round, digits=2))
+kbl(model_summary) %>% kable_classic(full_width=T, html_font = "Arial")
+```
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
+one <- model_summary %>% filter(Position=="FWD") %>% select(-Position) %>%
+  pivot_longer(!Model, names_to = "Stat", values_to = "value") %>%
+  filter(Stat!="MSE") %>%
+  mutate(value=round(value,1))
+two <- ggplot(one, aes(x=Stat, y=value, fill=Model)) +
+  geom_col(position=position_dodge(width=0.9)) +
+  geom_text(aes(x=Stat, y=value, label=value), 
+            position = position_dodge(width=0.9), vjust=-.5) +
+  ggtitle("Model Statistics for Forwards")
+two
+one <- model_summary %>% filter(Position=="MID") %>% select(-Position) %>%
+  pivot_longer(!Model, names_to = "Stat", values_to = "value") %>%
+  filter(Stat!="MSE") %>%
+  mutate(value=round(value,1))
+two <- ggplot(one, aes(x=Stat, y=value, fill=Model)) +
+  geom_col(position=position_dodge(width=0.9)) +
+  geom_text(aes(x=Stat, y=value, label=value), 
+            position = position_dodge(width=0.9), vjust=-.5) +
+  ggtitle("Model Statistics for Midfielders")
+two
+one <- model_summary %>% filter(Position=="DEF") %>% select(-Position) %>%
+  pivot_longer(!Model, names_to = "Stat", values_to = "value") %>%
+  filter(Stat!="MSE") %>%
+  mutate(value=round(value,1))
+two <- ggplot(one, aes(x=Stat, y=value, fill=Model)) +
+  geom_col(position=position_dodge(width=0.9)) +
+  geom_text(aes(x=Stat, y=value, label=value), 
+            position = position_dodge(width=0.9), vjust=-.5) +
+  ggtitle("Model Statistics for Defenders")
+two
+one <- model_summary %>% filter(Position=="GKP") %>% select(-Position) %>%
+  pivot_longer(!Model, names_to = "Stat", values_to = "value") %>%
+  filter(Stat!="MSE") %>%
+  mutate(value=round(value,1))
+two <- ggplot(one, aes(x=Stat, y=value, fill=Model)) +
+  geom_col(position=position_dodge(width=0.9)) +
+  geom_text(aes(x=Stat, y=value, label=value), 
+            position = position_dodge(width=0.9), vjust=-.5) +
+  ggtitle("Model Statistics for Goalkeepers")
+two
+```
+
+
+# Prediction on model
+
+
+Separate scripts have been prepared to pull up to date squads from Transfrmarkt and FBref. The worldfootballR package contains a data dictionary to match player names from FBref and Transfrmrkt by url. Data from Fbref is then averaged over the previous two seasons (2021/22 and 2022/23) to capture short-term variations in playing time and season statistics. This average was weighted to place greater value on data from the 2022/23 season. 
+
+
+Penalty factors are applied to players who have joined squads from other leagues, using the FiveThirtyEight Soccer Power Index Rankings (https://projects.fivethirtyeight.com/soccer-predictions/global-club-rankings/) and the TeamForm World league rankings (https://www.teamform.com/en/league-ranking/world).
+
+
+Only optimal models by position are utilized to predict results.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
+library(openxlsx)
+outfield <- read.csv("outfield_new_players.csv")
+
+points <- fwd$Points %>% as.matrix()
+temp <- trends %>% ungroup() %>% filter(Position=="FWD") %>% 
+  select(-c("Points", "Bonus", "Position")) %>%
+  mutate_all(~ ifelse(is.na(.),0,.)) %>% data.matrix()
+one <- glmnet(temp, points, alpha=0)
+five <- cv.glmnet(temp, points, alpha=0)
+lambda <- five$lambda.min
+
+fwd <- trends %>% ungroup() %>% filter(Position=="FWD") %>%
+  select(all_of(c("Player", "Points")), all_of(f_rows)) %>%
+  mutate_all(~ ifelse(is.na(.),0,.))
+
+train_index <- sample(1:nrow(fwd), nrow(fwd) * 0.8)
+train_data <- fwd[train_index, ]
+fwd_xtrain <- train_data %>% select(-c("Player", "Points"))
+  
+fwd_ytrain <- train_data %>% select(Points) %>% data.matrix()
+fwd_test_data <- fwd[-train_index, ]
+fwd_xtest <- test_data %>% select(-c("Player", "Points")) %>% data.matrix()
+fwd_ytest <- test_data %>% select(Points) %>% data.matrix()
+#dim(train_data)
+#dim(test_data)
+
+fwd_model <- glmnet(fwd_xtrain, fwd_ytrain, alpha=0, lambda = lambda)
+
+temp <- outfield %>% filter(Position=="FWD") %>% select(Player, Position)
+one <- outfield %>% filter(Position=="FWD") %>% select(all_of(f_rows)) %>% 
+  mutate_all(~ ifelse(is.na(.),0,.)) %>% data.matrix()
+  
+prediction <- predict(fwd_model, newx=one) %>% data.frame() %>%
+  cbind(temp$Player) %>% cbind(temp$Position) %>%
+  rename(Predicted_Points=1, Player=2, Position=3) %>%
+  select(Player, everything())
+
+fwd <- one %>% cbind(prediction) %>%
+  mutate(Position="FWD") %>%
+  select(Player, Position, Predicted_Points, everything())
+
+temp <- outfield %>% filter(Position=="MID") %>% select(Player, Position)
+one <- outfield %>% filter(Position=="MID") %>% select(all_of(m_rows)) %>%
+  mutate_all(~ ifelse(is.na(.),0,.)) %>% data.frame()
+
+prediction <- predict(ols_mid, newdata = one) %>% data.frame() %>%
+  cbind(temp$Player) %>% cbind(temp$Position) %>%
+  rename(Predicted_Points=1, Player=2, Position=3) %>%
+  select(Player, everything())
+
+mid <- one %>% cbind(prediction) %>%
+  mutate(Position="MID") %>%
+  select(Player, Position, Predicted_Points, everything())
+
+points <- def$Points %>% as.matrix()
+temp <- trends %>% ungroup() %>% filter(Position=="DEF") %>% 
+  select(-c("Points", "Bonus", "Position")) %>%
+  mutate_all(~ ifelse(is.na(.),0,.)) %>% data.matrix()
+one <- glmnet(temp, points, alpha=0)
+five <- cv.glmnet(temp, points, alpha=0)
+lambda <- five$lambda.min
+
+def <- trends %>% ungroup() %>% filter(Position=="DEF") %>%
+  select(all_of(c("Player", "Points")), all_of(d_rows)) %>%
+  mutate_all(~ ifelse(is.na(.),0,.))
+
+train_index <- sample(1:nrow(def), nrow(def) * 0.8)
+train_data <- def[train_index, ]
+x_train <- train_data %>% select(-c("Player", "Points"))
+  
+y_train <- train_data %>% select(Points) %>% data.matrix()
+test_data <- def[-train_index, ]
+x_test <- test_data %>% select(-c("Player", "Points")) %>% data.matrix()
+y_test <- test_data %>% select(Points) %>% data.matrix()
+#dim(train_data)
+#dim(test_data)
+
+def_model <- glmnet(x_train, y_train, alpha=0, lambda = lambda)
+
+temp <- outfield %>% filter(Position=="DEF") %>% select(Player, Position)
+one <- outfield %>% filter(Position=="DEF") %>% select(all_of(d_rows)) %>%
+  mutate_all(~ ifelse(is.na(.),0,.)) %>% data.matrix()
+  
+prediction <- predict(def_model, newx=one) %>% data.frame() %>%
+  cbind(temp$Player) %>% cbind(temp$Position) %>% 
+  rename(Predicted_Points=1, Player=2, Position=3) %>%
+  select(Player, everything())
+
+def <- one %>% cbind(prediction) %>%
+  mutate(Position="DEF") %>%
+  select(Player, Position, Predicted_Points, everything())
+
+
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
+keepers <- read.csv("keepers_new_players.csv")
+  
+
+set.seed(123)
+
+train_index <- sample(1:nrow(gk), nrow(gk) * 0.8)
+train_data <- gk[train_index, ]
+x_train <- train_data %>% select(-c("Player"))
+  
+y_train <- train_data %>% select(Points) %>% data.matrix()
+test_data <- gk[-train_index, ]
+x_test <- test_data %>% select(-c("Player")) %>% data.matrix()
+y_test <- test_data %>% select(Points) %>% data.matrix()
+#dim(train_data)
+#dim(test_data)
+
+tr_control <- trainControl(method = "repeatedcv", number = 10, repeats=3, search = "grid")
+# model <- train(Points~., data = x_train, method = "rf", trControl = tr_control, ntree=100)
+# print(model)
+#best mtry=37
+# tr_control <- trainControl(method = "repeatedcv", number = 10, repeats=3, search = "random")
+# model <- train(Points~., data = x_train, method = "rf", trControl = tr_control, ntree=100)
+# print(model)
+# Best is grid, mtry=40
+tunegrid <- expand.grid(.mtry=37)
+
+# one <- list()
+# for (maxnodes in c(5:15)){
+#   set.seed(123)
+#   rf_maxnode <- train(Points~., data=x_train, method="rf", tuneGrid=tunegrid,
+#                       trControl=tr_control, importance=T, nodesize=14,
+#                       maxnodes=maxnodes, ntree=100)
+#   current_iteration <- toString(maxnodes)
+#   one[[current_iteration]] <- rf_maxnode
+# }
+# two <- resamples(one)
+# summary(two)
+# best maxnodes is 5
+
+# three <- list()
+# for(ntree in c(50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700)) {
+#   set.seed(123)
+#   rf_maxtrees <- train(Points~., data=x_train, method="rf", tuneGrid=tunegrid,
+#                        trControl=tr_control, importance=T, nodesize=14,
+#                        maxnodes=5, ntree=ntree)
+#   key <- toString(ntree)
+#   three[[key]] <- rf_maxtrees
+# }
+# four <- resamples(three)
+# summary(four)
+# best trees is 50
+
+gk_model <- train(Points~., data = x_train, method = "rf", tuneGrid=tunegrid,
+              trControl=tr_control, importance=T, nodesize=5, ntree=50,
+              maxnodes=12)
+
+temp <- keepers %>% select(Player, Position)
+one <- keepers %>% select(all_of(gk_rows)) %>%
+  mutate_all(~ ifelse(is.na(.),0,.)) %>% data.matrix()
+
+prediction <- predict(gk_model, one) %>% data.frame() %>%
+  cbind(temp$Player) %>% cbind(temp$Position) %>%
+  rename(Predicted_Points=1, Player=2, Position=3) %>%
+  mutate(Position="GKP") %>%
+  select(Player, Position, everything())
+
+gk <- one %>% cbind(prediction) %>%
+  mutate(Position="GKP") %>%
+  select(Player, Position, Predicted_Points, everything())
+
+```
+
+# Value index 
+
+A value index is calculated to compare relative values of players across positions. This index is calculated using z-scores of player's predicted points, overall and by position.
+
+The overall Excel file is exported from this markdown file.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
+one <- fwd %>% arrange(-Predicted_Points) %>%
+  mutate(Pos_rank=row_number()) %>%
+  mutate(total_in_pos=1) %>% mutate(total_in_pos=sum(total_in_pos)) %>%
+  select(Player, Position, Pos_rank, total_in_pos, Predicted_Points, SquadRank)
+two <- mid %>% arrange(-Predicted_Points) %>%
+  mutate(Pos_rank=row_number()) %>%
+  mutate(total_in_pos=1) %>% mutate(total_in_pos=sum(total_in_pos)) %>%
+  select(Player, Position, Pos_rank, total_in_pos, Predicted_Points, SquadRank)
+three <- def %>% arrange(-Predicted_Points) %>%
+  mutate(Pos_rank=row_number()) %>%
+  mutate(total_in_pos=1) %>% mutate(total_in_pos=sum(total_in_pos)) %>%
+  select(Player, Position, Pos_rank, total_in_pos, Predicted_Points, SquadRank)
+four <- gk %>% arrange(-Predicted_Points) %>%
+  mutate(Pos_rank=row_number()) %>%
+  mutate(total_in_pos=1) %>% mutate(total_in_pos=sum(total_in_pos)) %>%
+  select(Player, Position, Pos_rank, total_in_pos, Predicted_Points, SquadRank)
+
+five <- rbind(one, two, three, four) %>%
+  arrange(-Predicted_Points) %>%
+  # mutate(o_rank=row_number()) %>%
+  # mutate(rows=1) %>%
+  # mutate(rows=sum(rows)) %>%
+  mutate(`Value Index - Overall`=(Predicted_Points-mean(Predicted_Points))/sd(Predicted_Points)) %>%
+  group_by(Position) %>%
+  mutate(`Value Index - Position`=(Predicted_Points-mean(Predicted_Points))/sd(Predicted_Points)) %>%
+  ungroup() %>%
+  left_join(outfield, by="Player") %>%
+  select(Player, Position.x, Predicted_Points, `Value Index - Overall`, `Value Index - Position`, team_name) %>%
+  left_join(keepers, by="Player") %>%
+  mutate(team_name.x=ifelse(is.na(team_name.x),team_name.y,team_name.x)) %>%
+  select(Player, Position.x, team_name.x, Predicted_Points, `Value Index - Overall`, `Value Index - Position`) %>%
+  arrange(-`Value Index - Overall`) %>%
+  rename(Team=team_name.x, Position=Position.x) %>%
+  mutate(Predicted_Points=round(Predicted_Points,0)) %>%
+  mutate(`Value Index - Overall`=round(`Value Index - Overall`, 2)) %>%
+  mutate(`Value Index - Position`=round(`Value Index - Position`, 2))
+```
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+kbl(head(five)) %>% kable_classic(full_width=T, html_font = "Arial")
+```
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
+six <- five %>% select(Player, Position, `Value Index - Overall`, `Value Index - Position`, Team)
+
+one <- fwd %>% left_join(six, by=c("Player", "Position")) %>%
+  select(Player, Position, Team, Predicted_Points, `Value Index - Overall`, `Value Index - Position`, everything()) %>%
+  arrange(-`Value Index - Position`, -Predicted_Points) %>%
+  mutate(Predicted_Points=round(Predicted_Points,0)) 
+two <- mid %>% left_join(six, by=c("Player", "Position")) %>%
+  select(Player, Position, Team, Predicted_Points, `Value Index - Overall`, `Value Index - Position`, everything()) %>%
+  arrange(-`Value Index - Position`, -Predicted_Points) %>%
+  mutate(Predicted_Points=round(Predicted_Points,0))
+three <- def %>% left_join(six, by=c("Player", "Position")) %>%
+  select(Player, Position, Team, Predicted_Points, `Value Index - Overall`, `Value Index - Position`, everything()) %>%
+  arrange(-`Value Index - Position`, -Predicted_Points) %>%
+  mutate(Predicted_Points=round(Predicted_Points,0)) 
+four <- gk %>% left_join(six, by=c("Player", "Position")) %>%
+  select(Player, Position, Team, Predicted_Points, `Value Index - Overall`, `Value Index - Position`, everything()) %>%
+  arrange(-`Value Index - Position`, -Predicted_Points) %>%
+  mutate(Predicted_Points=round(Predicted_Points,0))
+```
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+kbl(head(one[, 1:6])) %>% kable_classic(full_width=T, html_font = "Arial")
+```
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+kbl(head(two[, 1:6])) %>% kable_classic(full_width=T, html_font = "Arial")
+```
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+kbl(head(three[, 1:6])) %>% kable_classic(full_width=T, html_font = "Arial")
+```
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+kbl(head(four[, 1:6])) %>% kable_classic(full_width=T, html_font = "Arial")
+```
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+seven <- one
+for(i in 7:79) {
+  name <- colnames(seven)[i]
+  mean <- mean(seven[, i])
+  sd <- sd(seven[, i])
+  seven[, i] <- round((seven[, i]-mean)/sd,2)
+  colnames(seven)[i] <- paste(colnames(seven)[i],"z-score",sep="_")
+}
+
+eight <- two
+for(i in 7:77) {
+  name <- colnames(eight)[i]
+  mean <- mean(eight[, i])
+  sd <- sd(eight[, i])
+  eight[, i] <- round((eight[, i]-mean)/sd,2)
+  colnames(eight)[i] <- paste(colnames(eight)[i],"z-score",sep="_")
+}
+
+nine <- three
+for(i in 7:69) {
+  name <- colnames(nine)[i]
+  mean <- mean(nine[, i])
+  sd <- sd(nine[, i])
+  nine[, i] <- round((nine[, i]-mean)/sd,2)
+  colnames(nine)[i] <- paste(colnames(nine)[i],"z-score",sep="_")
+}
+
+ten <- four
+for(i in 7:81) {
+  name <- colnames(ten)[i]
+  mean <- mean(ten[, i])
+  sd <- sd(ten[, i])
+  ten[, i] <- round((ten[, i]-mean)/sd,2)
+  colnames(ten)[i] <- paste(colnames(ten)[i],"z-score",sep="_")
+}
+
+xl_list <- list("overall"=five, "fwd"=one, "mid"=two, "def"=three, "gkp"=four,
+                "fwd_z-score"=seven, "mid_z-score"=eight, "def_z-score"=nine,
+                "gkp_z-score"=ten)
+write.xlsx(xl_list, file = "final_prediction.xlsx")
+```
+
+Forwards continue to provide the highest value on average, while defenders provide the lowest average value as offensive production is a much more reliable metric for measuring output. Defender performance is more reliant on clean sheets for scoring, and have less consistent play time than forwards.
+
+The second graphic shows the hierarchy of average predicted points by team, with Liverpool expected to have the highest scoring averages among all teams.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
+## Place some exploratory plots for the results
+
+### Positions that are most valuable based on predicted points, value index
+temp <- five %>% select(Position, Predicted_Points) %>% group_by(Position) %>%
+  summarize(Predicted_Points=mean(Predicted_Points, na.rm=T)) %>%
+  ungroup() %>%
+  pivot_longer(!Position, names_to = "Stat", values_to = "Value") %>%
+  mutate(Value=round(Value,1))
+one <- ggplot(temp, aes(x=Stat, y=Value, fill=Position)) +
+  geom_col(position=position_dodge(width=0.9)) +
+  geom_text(aes(x=Stat, y=Value, label=Value),
+            position = position_dodge(width=0.9), vjust=-.5) +
+  ggtitle("Predicted Points by Position")
+one
+
+temp <- five %>% group_by(Team) %>%
+  summarize(Predicted_Points=mean(Predicted_Points)) %>%
+  mutate(Rank=rank(-Predicted_Points)) %>%
+  mutate(d=percent_rank(Predicted_Points)) %>%
+  mutate(Quantile=ifelse(d<0.26,4,NA)) %>%
+  mutate(Quantile=ifelse(d>0.25,3,Quantile)) %>%
+  mutate(Quantile=ifelse(d>0.5,2,Quantile)) %>%
+  mutate(Quantile=ifelse(d>0.75,1,Quantile))
+one <- ggplot(temp, aes(x=Rank, y=Predicted_Points, colour=factor(Quantile), label=Team)) +
+  geom_point(alpha=0, aes(color=factor(Quantile))) +
+  geom_text(aes(color=factor(Quantile)), size=3) +
+  #coord_cartesian(clip="off") +
+  ggtitle("Average Predicted Points by Team")
+one
+```
+
+# Appendix
+
+
+### A: Processing data
+
+
+Data was gathered from FBref using the following statistics categories for seasons 2014-2023:
+
+
+* Standard: A collection of basic player output data such as scoring contributions, and minutes/matches played. Includes per 90 statistics as well.
+
+
+* Shooting: More granular data on how often players shoot, how accurately, from where, and their conversion rate for turning shots to goals.
+
+
+* Defense: Estimates efficacy and number of defensive actions throughout a season. This includes tackles, rate of success with defensive actions, errors leading to goals, and other defensive actions that impact match outcomes.
+
+
+* Passing: Provides data for completion of passing attempts, passing types by length and progression of the ball, and creation of goal scoring opportunities through key passes.
+
+
+* Possession: Data shows frequency of losing the ball in possession, and rates of success in take-ons when attempting to dribble past players.
+
+
+* Keepers: Goalkeeping stats that show save ability and clean sheet rates.
+
+
+* Match logs: Used to validate the number of minutes players are on the field in the season, determine how many FPL qualifying clean sheets for each player, and determine the number of games in which players lost points for goals conceded.
+
+
+These statistics were gathered and collated through a series of scripts for each season using the WorldFootballR package (https://jaseziv.github.io/worldfootballR/index.html). Files were saved as CSVs for ease of use in the modeling exercise. Data used for training in the models were limited to 2017 as passing and possession data were not available prior to that season. Scripts can be found in the submodules and statistic folder of this directory.
+
+
+### B: Calculations
+
+
+#### SPI Penalty Calculations
+
+
+Penalties to new players were calculated based on previous league quality as estimated using data from 538's SPI, which estimates team strength around the world. The SPI was averaged by League to determine relative strength, with the Premier League being classified as the strongest league in the world. Leagues that were included in both the SPI and transfer arrival data from TransfrMarkt includes:
+
+
+* Bundesliga
+
+
+* Bundesliga 2
+
+
+* Ligue 1
+
+
+* Eredivise
+
+
+* Serie A
+
+
+* English League Championship
+
+
+* Portuguese Primeira Liga
+
+
+* La Liga
+
+
+* Scottish Premiership
+
+
+* English League One
+
+
+* Turkish Super League
+
+
+* Danish Superliga
+
+
+* Belgian Pro League A
+
+
+* Ligue 2
+
+
+* Greek Super League
+
+
+* Eerste Divise
+
+
+* Belgian First Division B
+
+The SPI penalty was calculated as:
+
+* League SPI/Premier League SPI
+
+# C: Validation
+
+### Models
+
+The validation of all models can be viewed below. The models do not appear to suffer from under or overfitting. The ridge regression models are already validated to the lowest lamba (MSE) when using k-fold validations as used in the models for defenders and forwards.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, results=FALSE}
+library(broom)
+set.seed(123)
+
+fwd <- trends %>% ungroup() %>% filter(Position=="FWD") %>%
+  select(all_of(c("Player", "Points")), all_of(f_rows)) %>%
+  mutate_all(~ ifelse(is.na(.),0,.))
+
+train_index <- sample(1:nrow(fwd), nrow(fwd) * 0.8)
+train_data <- fwd[train_index, ]
+x_train <- train_data %>% select(-c("Player", "Points"))
+  
+y_train <- train_data %>% select(Points) %>% data.matrix()
+test_data <- fwd[-train_index, ]
+x_test <- test_data %>% select(-c("Player", "Points")) %>% data.matrix()
+y_test <- test_data %>% select(Points) %>% data.matrix()
+#dim(train_data)
+#dim(test_data)
+
+ridge_model <- glmnet(x_train, y_train, alpha=0, lambda = lambda)
+temp <- tidy(ridge_model)
+kbl(temp) %>% kable_classic(full_width=T, html_font = "Arial")
+x_train <- x_train %>% data.matrix()
+temp <- train_data %>% select(Player, Points)
+one <- predict(ridge_model, newx = x_train) %>% data.frame() %>%
+  rename(Predicted=1) %>% cbind(temp) %>% 
+  mutate(Points=log(Points)) %>%
+  mutate(Predicted=log(Predicted)) %>%
+  select(Player, Points, Predicted) %>%
+  arrange(-Points) %>%
+  mutate(row=row_number())
+temp <- test_data %>% select(Player, Points)
+two <- predict(ridge_model, newx = x_test) %>% data.frame() %>%
+  rename(Predicted=1) %>% cbind(temp) %>%
+  mutate(Points=log(Points)) %>%
+  mutate(Predicted=log(Predicted)) %>%
+  arrange(-Points) %>%
+  mutate(row=row_number())
+
+plot <- ggplot(one, aes(x=row, y=Points, color="Observed Point totals")) +
+  geom_point() +
+  geom_point(aes(y=Predicted, color="Predicted point totals")) +
+  geom_smooth(aes(y=Predicted, color="Smoothed best fit - Training")) +
+  geom_smooth(aes(y=Points, color="Smoothed best fit - Observed")) +
+  theme(axis.text.x = element_blank(),
+        legend.title = element_blank()) +
+  xlab("Player") + ylab(" Log Points") +
+  ggtitle("Lowess curve: Validation of forwards ridge regression model, Training model")
+plot
+
+plot <- ggplot(two, aes(x=row, y=Points, color="Observed Point totals")) +
+  geom_point() +
+  geom_point(aes(y=Predicted, color="Predicted point totals")) +
+  geom_smooth(aes(y=Predicted, color="Smoothed best fit - Training")) +
+  geom_smooth(aes(y=Points, color="Smoothed best fit - Observed")) +
+  theme(axis.text.x = element_blank(),
+        legend.title = element_blank()) +
+  xlab("Player") + ylab(" Log Points") +
+  ggtitle("Lowess curve: Validation of forwards ridge regression model, Testing model")
+plot
+```
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+def<- trends %>% ungroup() %>% filter(Position=="DEF") %>%
+  select(where(~ !is.character(.x))) %>%
+  mutate_all(~ ifelse(is.na(.),0,.))
+
+points <- def$Points %>% as.matrix()
+temp <- trends %>% ungroup() %>% filter(Position=="DEF") %>% 
+  select(-c("Points", "Bonus", "Position")) %>%
+  mutate_all(~ ifelse(is.na(.),0,.)) %>% data.matrix()
+one <- glmnet(temp, points, alpha=0)
+five <- cv.glmnet(temp, points, alpha=0)
+lambda <- five$lambda.min
+
+set.seed(123)
+
+def <- trends %>% ungroup() %>% filter(Position=="DEF") %>%
+  select(all_of(c("Player", "Points")), all_of(d_rows)) %>%
+  mutate_all(~ ifelse(is.na(.),0,.))
+
+train_index <- sample(1:nrow(def), nrow(def) * 0.8)
+train_data <- def[train_index, ]
+x_train <- train_data %>% select(-c("Player", "Points"))
+  
+y_train <- train_data %>% select(Points) %>% data.matrix()
+test_data <- def[-train_index, ]
+x_test <- test_data %>% select(-c("Player", "Points")) %>% data.matrix()
+y_test <- test_data %>% select(Points) %>% data.matrix()
+#dim(train_data)
+#dim(test_data)
+
+ridge_model <- glmnet(x_train, y_train, alpha=0, lambda = lambda)
+temp <- train_data %>% select(Player, Points)
+x_train <- x_train %>% data.matrix()
+one <- predict(ridge_model, newx = x_train) %>% data.frame() %>%
+  rename(Predicted=1) %>% cbind(temp) %>% 
+  mutate(Points=log(Points)) %>%
+  mutate(Predicted=log(Predicted)) %>%
+  select(Player, Points, Predicted) %>%
+  arrange(-Points) %>%
+  mutate(row=row_number())
+plot <- ggplot(one, aes(x=row, y=Points, color="Observed Point totals")) +
+  geom_point() +
+  geom_point(aes(y=Predicted, color="Predicted point totals")) +
+  geom_smooth(aes(y=Predicted, color="Smoothed best fit - Training")) +
+  geom_smooth(aes(y=Points, color="Smoothed best fit - Observed")) +
+  theme(axis.text.x = element_blank(),
+        legend.title = element_blank()) +
+  xlab("Player") + ylab("Log Points") +
+  ggtitle("Lowess curve: Validation of defenders ridge regression model, Training model")
+plot
+
+temp <- test_data %>% select(Player, Points)
+one <- predict(ridge_model, newx = x_test) %>% data.frame() %>%
+  rename(Predicted=1) %>% cbind(temp) %>% 
+  mutate(Points=log(Points)) %>%
+  mutate(Predicted=log(Predicted)) %>%
+  select(Player, Points, Predicted) %>%
+  arrange(-Points) %>%
+  mutate(row=row_number())
+plot <- ggplot(two, aes(x=row, y=Points, color="Observed Point totals")) +
+  geom_point() +
+  geom_point(aes(y=Predicted, color="Predicted point totals")) +
+  geom_smooth(aes(y=Predicted, color="Smoothed best fit - Testing")) +
+  geom_smooth(aes(y=Points, color="Smoothed best fit - Observed")) +
+  theme(axis.text.x = element_blank(),
+        legend.title = element_blank()) +
+  xlab("Player") + ylab("Log Points") +
+  ggtitle("Lowess curve: Validation of defenders ridge regression model, Testing model")
+plot
+```
+
+OLS models are validated by looking for impact from outliers, impact from heteroskedasticity (occurs when variance between all observations is not the same, violates ordinary least squares assumption that variances are equal), and checks for overfitting of the model. Validation figures can be seen below:
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+mid <- trends %>% ungroup() %>% filter(Position=="MID") %>%
+  select(all_of(c("Player", "Points")), all_of(m_rows)) %>%
+  mutate_all(~ ifelse(is.na(.),0,.))
+
+one <- sample(seq_len(nrow(mid)), size=round(0.8*nrow(mid)), replace = F)
+two <- setdiff(seq_len(nrow(mid)), one)
+
+x_train <- mid[one, ] %>% select(-Player)
+x_test <- mid[two, ]
+temp <- x_test %>% select(Player)
+mid_xtest <- x_test %>% select(-Player)
+temp <- mid[one, ] %>% data.frame() %>% select(Player, Points)
+one <- predict(ols_mid, newdata = x_train) %>% data.frame() %>%
+  rename(Predicted=1) %>% cbind(temp) %>%
+  mutate(Points=log(Points)) %>% mutate(Predicted=log(Predicted)) %>%
+  arrange(-Points) %>%
+  mutate(row=row_number())
+plot <- ggplot(one, aes(x=row, y=Points, color="Observed point totals")) +
+  geom_point() +
+  geom_point(aes(y=Predicted, color="Predicted point totals")) +
+  geom_smooth(aes(y=Predicted, color="Smoothed best fit - Training")) +
+  geom_smooth(aes(y=Points, color="Smoothed best fit - Observed")) +
+  theme(axis.text.x = element_blank(),
+        legend.title = element_blank()) +
+  xlab("Player") + ylab("Log Points") +
+  ggtitle("Lowess curve: Validation of midfielders OLS regression model, Training model")
+plot
+
+temp <- mid[two, ] %>% data.frame() %>% select(Player, Points)
+one <- predict(ols_mid, newdata = x_test) %>% data.frame() %>%
+  rename(Predicted=1) %>% cbind(temp) %>%
+  mutate(Points=log(Points)) %>% mutate(Predicted=log(Predicted)) %>%
+  arrange(-Points) %>%
+  mutate(row=row_number())
+plot <- ggplot(one, aes(x=row, y=Points, color="Observed point totals")) +
+  geom_point() +
+  geom_point(aes(y=Predicted, color="Predicted point totals")) +
+  geom_smooth(aes(y=Predicted, color="Smoothed best fit - Testing")) +
+  geom_smooth(aes(y=Points, color="Smoothed best fit - Observed")) +
+  theme(axis.text.x = element_blank(),
+        legend.title = element_blank()) +
+  xlab("Player") + ylab("Log Points") +
+  ggtitle("Lowess curve: Validation of midfielders OLS regression model, Testing model")
+plot
+
+
+```
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results=TRUE}
+set.seed(123)
+
+gk <- trends2 %>% ungroup() %>% 
+  select(all_of(c("Player", "Points")), all_of(gk_rows)) %>%
+  mutate_all(~ ifelse(is.na(.),0,.))
+
+train_index <- sample(1:nrow(gk), nrow(gk) * 0.8)
+train_data <- gk[train_index, ]
+x_train <- train_data %>% select(-c("Player"))
+  
+y_train <- train_data %>% select(Points) %>% data.matrix()
+test_data <- gk[-train_index, ]
+x_test <- test_data %>% select(-c("Player")) %>% data.matrix()
+y_test <- test_data %>% select(Points) %>% data.matrix()
+#dim(train_data)
+#dim(test_data)
+
+tr_control <- trainControl(method = "repeatedcv", number = 10, repeats=3, search = "random")
+
+tunegrid <- expand.grid(.mtry=41)
+
+rf_model <- train(Points~., data = x_train, method = "rf", tuneGrid=tunegrid,
+              trControl=tr_control, importance=T, nodesize=14, ntree=200,
+              maxnodes=12)
+
+temp <- train_data %>% select(Player, Points)
+one <- predict(rf_model, x_train) %>% data.frame() %>%
+  rename(Predicted=1) %>% cbind(temp) %>%
+  mutate(Points=log(Points)) %>% mutate(Predicted=log(Predicted)) %>%
+  arrange(-Points) %>%
+  mutate(row=row_number())
+plot <- ggplot(one, aes(x=row, y=Points, color="Observed point totals")) +
+  geom_point() +
+  geom_point(aes(y=Predicted, color="Predicted point totals")) +
+  geom_smooth(aes(y=Predicted, color="Smoothed best fit - Training")) +
+  geom_smooth(aes(y=Points, color="Smoothed best fit - Observed")) +
+  theme(axis.text.x = element_blank(),
+        legend.title = element_blank()) +
+  xlab("Player") + ylab("Log Points") +
+  ggtitle("Lowess curve: Validation of goalkeepers random forest model, Training model")
+plot
+
+temp <- test_data %>% select(Player, Points)
+one <- predict(rf_model, x_test) %>% data.frame() %>%
+  rename(Predicted=1) %>% cbind(temp) %>%
+  mutate(Points=log(Points)) %>% mutate(Predicted=log(Predicted)) %>%
+  arrange(-Points) %>%
+  mutate(row=row_number())
+plot <- ggplot(one, aes(x=row, y=Points, color="Observed point totals")) +
+  geom_point() +
+  geom_point(aes(y=Predicted, color="Predicted point totals")) +
+  geom_smooth(aes(y=Predicted, color="Smoothed best fit - Testing")) +
+  geom_smooth(aes(y=Points, color="Smoothed best fit - Observed")) +
+  theme(axis.text.x = element_blank(),
+        legend.title = element_blank()) +
+  xlab("Player") + ylab("Log Points") +
+  ggtitle("Lowess curve: Validation of goalkeepers random forest model, Testing model")
+plot
+
+```

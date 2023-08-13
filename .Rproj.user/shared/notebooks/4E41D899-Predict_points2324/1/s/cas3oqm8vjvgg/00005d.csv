@@ -1,0 +1,14 @@
+"0","plot <- ggplot(two, aes(x=row, y=Points, color=""Observed Point totals"")) +"
+"0","  geom_point() +"
+"0","  geom_point(aes(y=Predicted, color=""Predicted point totals"")) +"
+"0","  geom_smooth(aes(y=Predicted, color=""Smoothed best fit - Training"")) +"
+"0","  geom_smooth(aes(y=Points, color=""Smoothed best fit - Observed"")) +"
+"0","  theme(axis.text.x = element_blank(),"
+"0","        legend.title = element_blank()) +"
+"0","  xlab(""Player"") + ylab("" Log Points"") +"
+"0","  ggtitle(""Lowess curve: Validation of forwards ridge regression model, Testing model"")"
+"0","plot"
+"1","[38;5;253m`geom_smooth()` using method = 'loess' and formula = 'y ~ x'[39m
+"
+"1","[38;5;253m`geom_smooth()` using method = 'loess' and formula = 'y ~ x'[39m
+"

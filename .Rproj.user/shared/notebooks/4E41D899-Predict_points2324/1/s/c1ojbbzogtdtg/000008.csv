@@ -1,0 +1,1 @@
+"0","kbl(head(one[, 1:6])) %>% kable_classic(full_width=T, html_font = ""Arial"")"

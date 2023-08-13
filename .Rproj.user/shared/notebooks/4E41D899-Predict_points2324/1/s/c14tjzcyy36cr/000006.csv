@@ -1,0 +1,20 @@
+"0","library(rstudioapi)"
+"0","library(tidyverse)"
+"0","library(kableExtra)"
+"0","setwd(dirname(rstudioapi::getActiveDocumentContext()$path))"
+"0","injuries <- read.csv(""submodules/injuries/injuries.csv"") %>% select(-X)"
+"0","outfield <- read.csv(""outfield_players.csv"") %>% select(-X) %>%"
+"0","  left_join(injuries, by=c(""Player""=""PlayerFBref"", ""Season"")) %>%"
+"0","  rename(InjuryGamesMissed=games_missed) "
+"0","keepers <- read.csv(""keepers.csv"") %>% select(-X) %>%"
+"0","  left_join(injuries, by=c(""Player""=""PlayerFBref"", ""Season"")) %>%"
+"0","  rename(InjuryGamesMissed=games_missed) "
+"0","quietly(gc())"
+"1","function (...) 
+"
+"1","capture_output(.f(...))
+"
+"1","<bytecode: 0x00000209f822d8e0>
+"
+"1","<environment: 0x000002098446bb58>
+"

@@ -1,0 +1,779 @@
+Player,Team,Position,Points,Bonus,CS
+Šarkić,WOL,GKP,0,0,0
+Adam Armstrong,SOU,FWD,54,3,1
+Andre Ayew,NFO,MID,11,0,0
+Abdoulaye Doucoure,EVE,MID,76,10,4
+Alex Moreno,AVL,DEF,72,5,7
+Alvarez,MCI,FWD,103,14,5
+Ait Nouri,WOL,DEF,41,0,4
+Aaronson,LEE,MID,83,0,5
+Abbott,TOT,MID,1,0,0
+Ablade,FUL,FWD,0,0,0
+Adama Traore,WOL,MID,66,0,2
+Adams,LEE,MID,47,1,5
+Adams,SOU,FWD,94,9,4
+Adaramola,CRY,DEF,0,0,0
+Adrian,LIV,GKP,0,0,0
+Adu-Adjei,BOU,FWD,0,0,0
+Aguerd,WHU,DEF,58,5,5
+Ahamada,CRY,MID,7,0,0
+Ajer,BRE,DEF,29,0,4
+Ake,MCI,DEF,92,9,9
+Akanji,MCI,DEF,82,5,7
+Albrighton,LEI,MID,13,0,0
+Alcaraz,SOU,MID,55,4,0
+Alexander-Arnold,LIV,DEF,156,21,10
+Alisson,LIV,GKP,162,15,14
+Allan,EVE,MID,0,0,0
+Almiron,NEW,MID,158,15,15
+Alonso,CHE,DEF,0,0,0
+Alonso,TOT,MID,0,0,0
+Alzate,BHA,MID,0,0,0
+Amad,MUN,MID,0,0,0
+Amartey,LEI,DEF,51,4,5
+Amo-Ameyaw,SOU,MID,1,0,0
+Ampadu,CHE,DEF,0,0,0
+Anang,WHU,GKP,0,0,0
+Andersen,CRY,DEF,80,1,8
+Anderson,NEW,MID,30,2,1
+André Gomes,EVE,MID,0,0,0
+Andreas Pereira,FUL,MID,123,9,8
+Andrey Santos,CHE,MID,0,0,0
+Anthony,BOU,MID,61,4,2
+Antonio,WHU,FWD,84,4,5
+Antony,MUN,MID,82,4,12
+Archer,AVL,FWD,6,0,0
+Areola,WHU,GKP,7,0,0
+Aribo,SOU,MID,46,3,1
+Arrizabalaga,CHE,GKP,118,15,9
+Arter,NFO,MID,0,0,0
+Arthur,LIV,MID,0,0,0
+Ashby,NEW,DEF,0,0,0
+Aubameyang,CHE,FWD,25,3,1
+Augustinsson,AVL,DEF,2,0,0
+Aurier,NFO,DEF,70,8,6
+Austin,TOT,GKP,0,0,0
+Awoniyi,NFO,FWD,100,16,5
+Ayari,BHA,MID,3,0,0
+Ayling,LEE,DEF,59,4,3
+Azpilicueta,CHE,DEF,45,4,3
+B.Williams,MUN,DEF,0,0,0
+Badé,NFO,DEF,0,0,0
+Badiashile,CHE,DEF,40,2,4
+Bailey,AVL,MID,100,6,8
+Bailly,MUN,DEF,0,0,0
+Bajcetic,LIV,MID,22,0,3
+Balcombe,BRE,GKP,0,0,0
+Ballard,SOU,FWD,2,0,0
+Balmer,CRY,DEF,0,0,0
+Bamford,LEE,FWD,70,3,1
+Bandeira,ARS,MID,0,0,0
+Baptiste,BRE,MID,29,0,1
+Barkley,CHE,MID,0,0,0
+Barnes,LEI,MID,138,0,6
+Bate,LEE,MID,0,0,0
+Bazunu,SOU,GKP,84,3,4
+Bech,BRE,DEF,4,0,0
+Bednarek,SOU,DEF,32,2,3
+Begovic,EVE,GKP,9,2,1
+Bella Kotchap,SOU,DEF,49,5,3
+Bennett,MUN,DEF,0,0,0
+Benrahma,WHU,MID,106,5,6
+Bentancur,TOT,MID,71,7,6
+Benteke,CRY,FWD,0,0,0
+Bentley,WOL,GKP,6,0,0
+Bergwijn,TOT,MID,0,0,0
+Bernardo,MCI,MID,106,9,7
+Bertrand,LEI,DEF,0,0,0
+Bettinelli,CHE,GKP,0,0,0
+Bevan,BOU,DEF,1,0,0
+Biancone,NFO,DEF,2,0,0
+Bidstrup,BRE,MID,0,0,0
+Billing,BOU,MID,126,14,9
+Bishop,MUN,GKP,0,0,0
+Bissouma,TOT,MID,27,0,1
+Bogarde,AVL,DEF,0,0,0
+Boly,NFO,DEF,37,7,3
+Botman,NEW,DEF,129,8,13
+Bowen,WHU,MID,145,9,9
+Branthwaite,EVE,DEF,0,0,0
+Braybrooke,LEI,MID,0,0,0
+Bree,SOU,DEF,4,0,0
+Broja,CHE,FWD,21,0,1
+Brooks,BOU,MID,5,0,0
+Guimaraes,NEW,MID,107,5,12
+Brunt,LEI,DEF,1,0,0
+Bryan,FUL,DEF,0,0,0
+Gil,TOT,MID,9,0,1
+Buendia,AVL,MID,117,8,11
+Bueno,WOL,DEF,41,3,3
+Buonanotte,BHA,MID,26,2,1
+Burn,NEW,DEF,129,6,14
+Butland,MUN,GKP,0,0,0
+Butler-Oyedeji,ARS,FWD,0,0,0
+Cheick Doucoure,CRY,MID,74,3,7
+C.Robinson,FUL,DEF,0,0,0
+Soares,FUL,DEF,10,0,0
+Caballero,SOU,GKP,0,0,0
+Cafu,NFO,MID,1,0,0
+Caicedo,BHA,MID,79,0,10
+Cairney,FUL,MID,53,2,1
+Caleta-Car,SOU,DEF,28,2,1
+Calvert-Lewin,EVE,FWD,40,2,4
+Campbell,WOL,MID,5,0,0
+Canos,BRE,DEF,5,0,0
+Cancelo,MCI,DEF,73,10,6
+Cannon,EVE,FWD,2,0,0
+Carson,MCI,GKP,0,0,0
+Carvalho,LIV,MID,27,0,0
+Casemiro,MUN,MID,87,10,10
+Casey,WHU,DEF,0,0,0
+Cash,AVL,DEF,57,3,4
+Castagne,LEI,DEF,114,11,8
+Cavaleiro,FUL,MID,0,0,0
+Trevoh Chalobah,CHE,DEF,49,1,5
+Nathaniel Chalobah,FUL,MID,1,0,0
+Oxlade-Chamberlain,LIV,MID,20,2,0
+Chambers,AVL,DEF,13,0,0
+Chambers,LIV,DEF,0,0,0
+Charles,MCI,MID,1,0,0
+Chilokoa-Mullen,LEE,DEF,0,0,0
+Chilwell,CHE,DEF,70,4,4
+Chiquinho,WOL,MID,0,0,0
+Choudhury,LEI,MID,0,0,0
+Christie,BOU,MID,64,2,3
+Chukwuemeka,CHE,MID,18,0,1
+Clark,LIV,MID,1,0,0
+Clark,NEW,DEF,0,0,0
+Clarke,BHA,DEF,0,0,0
+Clyne,CRY,DEF,44,0,3
+Coady,EVE,DEF,77,5,7
+Colback,NFO,MID,14,0,0
+Coleman,EVE,DEF,63,5,5
+Collins,WOL,DEF,49,6,4
+Colwill,BHA,DEF,46,6,3
+Lewis Cook,BOU,MID,51,1,3
+Steve Cook,NFO,DEF,20,0,2
+Cooper,LEE,DEF,31,1,2
+Cornet,WHU,MID,14,0,0
+Coufal,WHU,DEF,58,2,4
+Coutinho,AVL,MID,32,1,3
+Coventry,WHU,MID,1,0,0
+Cox,BRE,GKP,0,0,0
+Cozier-Duberry,ARS,MID,0,0,0
+Craig,TOT,MID,1,0,0
+Crama,BRE,DEF,0,0,0
+Cresswell,WHU,DEF,74,8,6
+Cucurella,CHE,DEF,65,1,6
+Cundle,WOL,MID,0,0,0
+Cunha,WOL,FWD,39,6,5
+Datro Fofana,CHE,FWD,3,0,0
+Dacosta Gonzalez,BOU,MID,0,0,0
+Daka,LEI,FWD,70,3,5
+Dale Taylor,NFO,FWD,0,0,0
+Dallas,LEE,DEF,0,0,0
+Dalot,MUN,DEF,102,19,10
+Damsgaard,BRE,MID,33,0,3
+Danilo,NFO,MID,48,5,1
+Danjuma,TOT,MID,15,0,0
+Darlow,NEW,GKP,0,0,0
+Darwin,LIV,FWD,100,8,7
+Dasilva,BRE,MID,81,3,5
+Tom Davies,EVE,MID,19,0,1
+Davies,LIV,DEF,0,0,0
+Ben Davies,TOT,DEF,99,3,9
+Davis,AVL,FWD,0,0,0
+Dawson,WOL,DEF,75,7,7
+De Bruyne,MCI,MID,183,26,10
+Reid,FUL,MID,90,3,8
+de Gea,MUN,GKP,161,5,17
+Delap,MCI,FWD,0,0,0
+Dele,EVE,MID,2,0,0
+Dembele,BOU,MID,6,0,0
+Dendoncker,AVL,MID,37,0,4
+Dennis,BOU,GKP,0,0,0
+Dennis,NFO,FWD,39,3,1
+Dervisoglu,BRE,FWD,4,0,0
+Devine,TOT,MID,0,0,0
+Dewsbury-Hall,LEI,MID,82,5,7
+Diallo,SOU,MID,19,0,0
+Dias,MCI,DEF,80,1,9
+Dibley-Dias,FUL,MID,0,0,0
+Diego Carlos,AVL,DEF,4,0,0
+Diego Costa,WOL,FWD,33,3,6
+Dier,TOT,DEF,96,5,9
+Digne,AVL,DEF,50,4,3
+Jota,LIV,FWD,80,9,5
+Diop,FUL,DEF,79,8,7
+Djenepo,SOU,MID,27,0,0
+Doak,LIV,MID,2,0,0
+Doherty,TOT,DEF,35,2,3
+Luiz,AVL,MID,142,17,13
+Downes,WHU,MID,27,0,1
+Doyle,SOU,MID,1,0,0
+Dräger,NFO,DEF,0,0,0
+Drameh,LEE,DEF,1,0,0
+Dubravka,NEW,GKP,11,1,1
+Duffy,FUL,DEF,4,0,0
+Dummett,NEW,DEF,0,0,0
+Dunk,BHA,DEF,112,7,12
+Duran,AVL,FWD,11,0,0
+Ebiowei,CRY,MID,3,0,0
+Ederson,MCI,GKP,121,8,11
+Edouard,CRY,FWD,82,5,5
+Edozie,SOU,MID,23,0,1
+El Ghazi,AVL,MID,0,0,0
+Elanga,MUN,MID,23,0,2
+Elliott,LIV,MID,62,2,5
+Elneny,ARS,MID,6,0,0
+Elyounoussi,SOU,MID,62,0,2
+Palmieri,WHU,DEF,39,2,2
+Emerson,TOT,DEF,86,9,7
+Enciso,BHA,FWD,57,7,4
+Enzo,CHE,MID,42,1,3
+Eriksen,MUN,MID,103,8,13
+Estupinan,BHA,DEF,128,15,10
+Evans,LEI,DEF,20,0,2
+Eze,CRY,MID,159,21,9
+Fabianski,WHU,GKP,127,10,9
+Fabinho,LIV,MID,70,0,11
+Fabio Silva,WOL,FWD,0,0,0
+Vieira,ARS,MID,40,2,2
+Faes,LEI,DEF,78,5,7
+Felipe,NFO,DEF,25,3,1
+Ferguson,BHA,FWD,65,8,6
+Ferguson,CRY,DEF,0,0,0
+Fernández,NEW,DEF,0,0,0
+Fernandes,MUN,MID,176,23,18
+Finnigan,SOU,MID,0,0,0
+Firmino,LIV,FWD,104,12,4
+Firpo,LEE,DEF,30,3,1
+Foden,MCI,MID,142,15,5
+Fornals,WHU,MID,71,6,1
+Forshaw,LEE,MID,16,0,0
+Forss,BRE,FWD,0,0,0
+Forster,TOT,GKP,40,1,3
+Francois,FUL,MID,1,0,0
+Fraser,NEW,MID,11,0,1
+Fraser,WOL,FWD,0,0,0
+Fred,MUN,MID,62,2,4
+Fredericks,BOU,DEF,12,0,0
+Freuler,NFO,MID,54,0,6
+Furlong,BHA,DEF,0,0,0
+G.Shelvey,NFO,GKP,0,0,0
+Gundogan,MCI,MID,132,9,10
+Gabriel,ARS,DEF,146,15,14
+Gakpo,LIV,MID,90,4,6
+Gallagher,CHE,MID,66,7,4
+Garnacho,MUN,MID,39,0,0
+Garner,EVE,MID,25,0,2
+Gayle,NEW,FWD,0,0,0
+Gazzaniga,FUL,GKP,0,0,0
+Gbamin,EVE,MID,0,0,0
+Gelhardt,LEE,FWD,20,0,0
+Ghoddos,BRE,MID,15,0,0
+Gibbs-White,NFO,MID,145,11,8
+Gilchrist,CHE,DEF,0,0,0
+Gillespie,NEW,GKP,0,0,0
+Gilmour,BHA,MID,21,0,2
+Gnonto,LEE,FWD,55,6,4
+Godfrey,EVE,DEF,18,0,1
+Godo,FUL,MID,0,0,0
+Gomes,MCI,MID,0,0,0
+Joe Gomez,LIV,DEF,68,8,8
+Goode,BRE,DEF,0,0,0
+Goodman,CRY,GKP,0,0,0
+Gordon,CRY,FWD,0,0,0
+Anthony Gordon,NEW,MID,68,5,4
+Gray,EVE,MID,91,4,7
+Gray,LEE,MID,0,0,0
+Grealish,MCI,MID,121,9,10
+Greenwood,BOU,DEF,0,0,0
+Greenwood,LEE,FWD,30,1,0
+Griffiths,WOL,MID,0,0,0
+Gross,BHA,MID,159,14,11
+Guehi,CRY,DEF,95,2,9
+Guaita,CRY,GKP,99,10,6
+Guedes,WOL,MID,29,1,2
+Gueye,EVE,MID,66,1,8
+Guilbert,AVL,DEF,0,0,0
+Gyabi,LEE,MID,1,0,0
+H.Davies,LIV,GKP,0,0,0
+Hamed Junior Traore,BOU,MID,14,0,2
+Hojbjerg,TOT,MID,120,10,10
+Haaland,MCI,FWD,272,40,13
+Hall,CHE,MID,19,3,1
+Hammond,NFO,MID,0,0,0
+Harris,FUL,MID,3,0,0
+Harrison,LEE,MID,134,15,6
+Hause,AVL,DEF,0,0,0
+Havertz,CHE,FWD,102,13,9
+Heaton,MUN,GKP,0,0,0
+Hegyi,WHU,GKP,0,0,0
+Hein,ARS,GKP,0,0,0
+Jordan Henderson,LIV,MID,69,0,8
+Dean Henderson,NFO,GKP,82,12,6
+Hendrick,NEW,MID,0,0,0
+Hennessey,NFO,GKP,8,0,0
+Henry,BRE,DEF,112,4,11
+Hickey,BRE,DEF,63,2,5
+Hill,BOU,DEF,0,0,0
+Hinshelwood,BHA,MID,1,0,0
+Hjelde,LEE,DEF,0,0,0
+Hodge,WOL,MID,5,0,0
+Holding,ARS,DEF,21,0,0
+Holgate,EVE,DEF,16,2,2
+Hudson-Odoi,CHE,MID,0,0,0
+Hughes,CRY,MID,41,3,1
+Humphreys,CHE,DEF,0,0,0
+Hutchinson,CHE,MID,1,0,0
+Hwang,WOL,MID,60,3,3
+Iheanacho,LEI,FWD,82,9,1
+Ings,WHU,FWD,97,13,5
+Iqbal,MUN,MID,0,0,0
+Iroegbunam,AVL,MID,0,0,0
+Isak,NEW,FWD,100,18,4
+Iversen,LEI,GKP,29,2,1
+Iwobi,EVE,MID,126,9,9
+Jordan Ayew,CRY,MID,104,4,8
+Jakupović,EVE,GKP,0,0,0
+Reece James,CHE,DEF,44,5,2
+Daniel James,FUL,MID,45,2,1
+Janelt,BRE,MID,85,5,8
+Jansson,BRE,DEF,29,0,2
+Jensen,BRE,MID,132,11,10
+Jesus,ARS,FWD,125,17,9
+Jimenez,WOL,FWD,29,0,2
+Joao Felix,CHE,FWD,44,7,2
+Joao Gomes,WOL,MID,21,2,2
+Joelinton,NEW,MID,115,10,11
+John,EVE,DEF,0,0,0
+Brennan Johnson,NFO,FWD,122,15,7
+Ben Johnson,WHU,DEF,29,1,2
+Johnstone,CRY,GKP,36,5,3
+Jones,LIV,MID,52,4,4
+Jones,MUN,DEF,0,0,0
+Jonny,WOL,DEF,45,0,5
+Jorginho,ARS,MID,79,5,9
+Jurado,MUN,DEF,0,0,0
+Justin,LEI,DEF,45,2,5
+Kadan Young,AVL,MID,0,0,0
+Kalajdzic,WOL,FWD,1,0,0
+Kamaldeen,SOU,MID,45,3,3
+Kamara,AVL,MID,44,0,3
+Kane,TOT,FWD,263,48,11
+Kante,CHE,MID,18,1,2
+Karius,NEW,GKP,0,0,0
+Keane,EVE,DEF,39,5,2
+Kebano,FUL,MID,40,0,3
+Kehrer,WHU,DEF,67,4,5
+Keita,LIV,MID,10,0,1
+Kelleher,LIV,GKP,2,0,0
+Kelly,BOU,DEF,60,5,5
+Kenedy,CHE,DEF,0,0,0
+Kesler Hayden,AVL,DEF,0,0,0
+Kilman,WOL,DEF,109,12,11
+Kinsey-Wellings,BOU,DEF,0,0,0
+Kiwior,ARS,DEF,26,1,2
+Klaesson,LEE,GKP,0,0,0
+Klich,LEE,MID,12,0,0
+Knight,MCI,MID,0,0,0
+Knockaert,FUL,MID,0,0,0
+Koch,LEE,DEF,55,2,5
+Konate,LIV,DEF,49,0,7
+Kongolo,FUL,DEF,0,0,0
+Konsa,AVL,DEF,110,6,12
+Koulibaly,CHE,DEF,74,8,6
+Kouyate,NFO,MID,35,2,2
+Kovár,MUN,GKP,0,0,0
+Kovacic,CHE,MID,53,2,4
+Kozłowski,BHA,MID,0,0,0
+Krafth,NEW,DEF,1,0,0
+Nissen,LEE,DEF,51,1,2
+Kristiansen,LEI,DEF,16,0,0
+Kulusevski,TOT,MID,96,5,8
+Kuol,NEW,MID,0,0,0
+Kurzawa,FUL,DEF,2,0,0
+Lallana,BHA,MID,47,4,5
+Lamptey,BHA,DEF,23,0,1
+Lanzini,WHU,MID,17,1,0
+Laporte,MCI,DEF,40,3,4
+Larios,SOU,DEF,4,0,0
+Laryea,NFO,DEF,0,0,0
+Lascelles,NEW,DEF,3,0,0
+Lavia,SOU,MID,57,0,4
+Lembikisa,WOL,DEF,1,0,0
+Lemina,WOL,MID,35,0,5
+Lenglet,TOT,DEF,63,6,5
+Leno,FUL,GKP,142,17,8
+Lerma,BOU,MID,101,5,7
+Rico Lewis,MCI,DEF,29,0,2
+Jamal Lewis,NEW,DEF,2,0,0
+Lewis-Potter,BRE,MID,14,0,0
+Lindelof,MUN,DEF,57,3,6
+Lingard,NFO,MID,33,0,5
+Lis,SOU,GKP,0,0,0
+Livramento,SOU,DEF,2,0,0
+Llorente,LEE,DEF,16,2,1
+Lloris,TOT,GKP,89,12,7
+Loftus-Cheek,CHE,MID,46,1,5
+Lolley,NFO,MID,0,0,0
+Lonergan,EVE,GKP,0,0,0
+Lowe,BOU,MID,2,0,0
+Lucas Moura,TOT,MID,17,0,0
+Luis Diaz,LIV,MID,62,7,4
+Lukic,FUL,MID,15,0,0
+Lyanco,SOU,DEF,29,0,0
+Lyle Taylor,NFO,FWD,0,0,0
+Mac Allister,BHA,MID,140,18,10
+Maddison,LEI,MID,135,9,4
+Madueke,CHE,MID,26,2,0
+Maguire,MUN,DEF,39,2,5
+Mahrez,MCI,MID,126,11,6
+Mainoo,MUN,MID,1,0,0
+Maitland-Niles,SOU,MID,38,0,3
+Malacia,MUN,DEF,62,8,7
+Mangala,NFO,MID,50,0,5
+Manquillo,NEW,DEF,4,0,0
+Mara,SOU,FWD,32,0,0
+Marçal-Madivadua,LEI,MID,0,0,0
+March,BHA,MID,147,16,10
+Marcondes,BOU,MID,1,0,0
+Marquinhos,ARS,MID,1,0,0
+Marschall,AVL,GKP,0,0,0
+Lisandro Martinez,MUN,DEF,81,6,9
+Martial,MUN,FWD,66,4,7
+Martinelli,ARS,MID,198,18,14
+Emiliano Martinez,AVL,GKP,135,15,11
+Masuaku,WHU,DEF,0,0,0
+Mateo Joseph,LEE,FWD,3,0,0
+Mateta,CRY,FWD,41,3,3
+Matheus,WOL,MID,80,5,11
+Matip,LIV,DEF,36,4,3
+Matthews,CRY,GKP,0,0,0
+Maupay,EVE,FWD,41,3,3
+Mbabu,FUL,DEF,7,0,0
+Mbe Soh,NFO,DEF,0,0,0
+Mbete,MCI,DEF,0,0,0
+Mbeumo,BRE,FWD,150,19,10
+McAllister,EVE,MID,0,0,0
+McArthur,CRY,MID,4,0,0
+McAtee,MCI,MID,0,0,0
+McAteer,LEI,MID,0,0,0
+McCarthy,SOU,GKP,8,0,0
+McGill,BHA,GKP,0,0,0
+McGinn,AVL,MID,90,3,10
+McKenna,NFO,DEF,40,0,5
+McKennie,LEE,MID,31,0,1
+McNeil,EVE,MID,126,14,5
+McTominay,MUN,MID,36,2,4
+Mee,BRE,DEF,143,11,12
+Edouard Mendy,CHE,GKP,24,0,1
+Nampalys Mendy,LEI,MID,30,1,0
+Mepham,BOU,DEF,43,6,5
+Meslier,LEE,GKP,90,8,5
+Mighten,NFO,MID,1,0,0
+Miley,NEW,MID,1,0,0
+Milivojevic,CRY,MID,23,0,2
+Mills,EVE,MID,0,0,0
+Milner,LIV,MID,42,0,3
+Mina,EVE,DEF,33,7,1
+Mings,AVL,DEF,130,17,12
+Mitchell,CRY,DEF,93,7,8
+Mitoma,BHA,MID,138,11,8
+Mitrovic,FUL,FWD,107,14,7
+Moder,BHA,MID,0,0,0
+Monteiro,LEE,DEF,0,0,0
+Moore,BOU,FWD,57,3,3
+Moran,BHA,MID,1,0,0
+Morgan,SOU,FWD,0,0,0
+Mosquera,WOL,DEF,0,0,0
+Mount,CHE,MID,82,8,8
+Moutinho,WOL,MID,56,0,6
+Mubama,WHU,FWD,3,0,0
+Mudryk,CHE,MID,25,0,0
+Mundle,TOT,MID,0,0,0
+Muniz,FUL,FWD,0,0,0
+Murphy,NEW,MID,78,2,3
+Mwepu,BHA,MID,11,0,0
+Mykolenko,EVE,DEF,75,4,7
+Neco Williams,NFO,DEF,54,1,4
+Norgaard,BRE,MID,71,6,6
+Nakamba,AVL,MID,0,0,0
+Navas,NFO,GKP,43,5,2
+Ndidi,LEI,MID,41,0,1
+Nelson,ARS,MID,42,5,1
+Neto,BOU,GKP,93,9,6
+Pedro Neto,WOL,MID,37,0,5
+Neves,WOL,MID,118,16,10
+Niakhate,NFO,DEF,25,0,2
+Nketiah,ARS,FWD,63,5,2
+Nkounkou,EVE,DEF,0,0,0
+Nwaneri,ARS,MID,1,0,0
+O'Brien,NFO,MID,22,0,1
+Odegaard,ARS,MID,212,30,13
+Offiah,BHA,DEF,1,0,0
+Ogbonna,WHU,DEF,44,4,4
+Ojeda,NFO,MID,0,0,0
+Oko-Flex,WHU,MID,0,0,0
+Olakigbe,BRE,MID,0,0,0
+Olise,CRY,MID,132,15,8
+Olsen,AVL,GKP,10,1,1
+Onana,EVE,MID,77,2,9
+Onomah,FUL,MID,2,0,0
+Onuachu,SOU,FWD,14,0,1
+Onyeka,BRE,MID,38,0,3
+O'Reilly,AVL,MID,0,0,0
+O'Reilly,MCI,MID,0,0,0
+Orsic,SOU,MID,1,0,0
+Ortega,MCI,GKP,23,5,2
+Ouattara,BOU,MID,49,4,1
+Ozoh,CRY,MID,1,0,0
+Pépé,ARS,MID,0,0,0
+Perez,LEI,MID,19,0,1
+Pablo Marí,ARS,DEF,0,0,0
+Palhinha,FUL,MID,83,5,9
+Palmer,MCI,MID,19,0,1
+Panzo,NFO,DEF,0,0,0
+Paqueta,WHU,MID,98,8,6
+Parkes,FUL,DEF,0,0,0
+Parrott,TOT,FWD,0,0,0
+Partey,ARS,MID,86,6,11
+Patterson,AVL,MID,0,0,0
+Patterson,EVE,DEF,31,0,2
+Payne,SOU,MID,0,0,0
+Pearson,BOU,MID,9,0,1
+Pedro Porro,TOT,DEF,59,5,2
+Pellistri,MUN,MID,4,0,0
+Perisic,TOT,DEF,94,6,6
+Perkins,LEE,FWD,0,0,0
+Perraud,SOU,DEF,71,5,4
+Perrone,MCI,MID,1,0,0
+Peupion,BHA,MID,1,0,0
+Phillips,CRY,MID,0,0,0
+Nathaniel Phillips,LIV,DEF,3,0,0
+Kalvin Phillips,MCI,MID,14,0,1
+Philogene-Bidace,AVL,MID,0,0,0
+Pickford,EVE,GKP,124,10,8
+Pinnock,BRE,DEF,112,6,10
+Plain,BOU,GKP,0,0,0
+Plange,CRY,FWD,0,0,0
+Podence,WOL,MID,92,10,6
+Pollock,BOU,FWD,0,0,0
+Pope,NEW,GKP,157,14,14
+Praet,LEI,MID,34,0,2
+Price,EVE,MID,0,0,0
+Pulisic,CHE,MID,39,0,3
+Sessegnon,TOT,DEF,35,0,1
+R.Williams,LIV,DEF,0,0,0
+Rak-Sakyi,CRY,MID,0,0,0
+Ramsay,LIV,DEF,0,0,0
+Ramsdale,ARS,GKP,143,9,14
+Ramsey,AVL,MID,135,13,11
+Randolph,BOU,GKP,0,0,0
+Raphinha,LEE,MID,0,0,0
+Rashford,MUN,MID,205,21,13
+Raya,BRE,GKP,166,20,12
+Ream,FUL,DEF,98,12,8
+Redmond,SOU,MID,1,0,0
+Reed,FUL,MID,107,9,9
+Reguilón,TOT,DEF,0,0,0
+Renan Lodi,NFO,DEF,56,3,5
+Revan,AVL,DEF,0,0,0
+Ricardo,LEI,DEF,20,2,0
+Rice,WHU,MID,116,12,9
+Richards,BHA,MID,0,0,0
+Richards,CRY,DEF,13,0,1
+Richards,NFO,DEF,0,0,0
+Richarlison,TOT,FWD,54,2,3
+Riedewald,CRY,MID,6,0,0
+Ritchie,NEW,DEF,7,0,0
+Roberts,BHA,DEF,0,0,0
+Roberts,LEE,MID,0,0,0
+Robertson,LIV,DEF,121,10,9
+Robertson,MCI,MID,0,0,0
+Robinson,FUL,DEF,93,5,9
+Robles,LEE,GKP,7,0,0
+Roca,LEE,MID,67,3,2
+Rodak,FUL,GKP,7,0,1
+Rodney,CRY,MID,0,0,0
+Rodon,TOT,DEF,0,0,0
+Rodri,MCI,MID,108,7,11
+Rodrigo,LEE,MID,127,6,5
+Roerslev,BRE,DEF,48,0,5
+Romero,TOT,DEF,66,3,8
+Romeu,SOU,MID,2,0,0
+Ronaldo,MUN,FWD,20,3,3
+Ronan,WOL,MID,1,0,0
+Rondon,EVE,FWD,7,0,0
+Rothwell,BOU,MID,33,0,3
+Rutter,LEE,FWD,15,0,0
+Stuart Armstrong,SOU,MID,57,2,1
+Longstaff,NEW,MID,93,2,13
+Sa,WOL,GKP,148,18,11
+Robert Sanchez,BHA,GKP,82,10,6
+Davinson Sanchez,TOT,DEF,28,1,2
+Soyuncu,LEI,DEF,16,3,0
+Sabitzer,MUN,MID,25,0,5
+Sadi,BOU,FWD,0,0,0
+Saint-Maximin,NEW,MID,66,4,4
+Saka,ARS,MID,202,19,12
+Salah,LIV,MID,239,23,13
+Saliba,ARS,DEF,117,14,12
+Salisu,SOU,DEF,33,2,1
+Samba,NFO,GKP,0,0,0
+Sambi,CRY,MID,23,0,2
+Samuels,BHA,DEF,0,0,0
+Samuels-Smith,EVE,DEF,0,0,0
+Sancho,MUN,MID,105,8,13
+Sanson,AVL,MID,2,0,0
+Sarabia,WOL,MID,27,3,3
+Sarmiento,BHA,MID,16,0,1
+Sarr,CHE,DEF,0,0,0
+Sarr,TOT,MID,14,0,0
+Saydee,BOU,FWD,0,0,0
+Scamacca,WHU,FWD,41,7,3
+Scarlett,TOT,FWD,0,0,0
+Scarpa,NFO,MID,5,0,0
+Schar,NEW,DEF,139,6,15
+Schade,BRE,MID,29,0,3
+Scherpen,BHA,GKP,0,0,0
+Schlupp,CRY,MID,89,2,9
+Schmeichel,LEI,GKP,0,0,0
+Sekularac,FUL,MID,0,0,0
+Semedo,WOL,DEF,75,5,8
+Semenyo,BOU,FWD,18,1,0
+Senesi,BOU,DEF,69,5,5
+Sergio Gomez,MCI,DEF,21,1,1
+Shackleton,LEE,MID,0,0,0
+Shaw,MUN,DEF,124,20,12
+Shelvey,NFO,MID,16,0,1
+Shoretire,MUN,FWD,0,0,0
+Simms,EVE,FWD,17,0,0
+Sinisalo,AVL,GKP,0,0,0
+Sinisterra,LEE,MID,53,6,0
+Skipp,TOT,MID,43,1,4
+Smallbone,SOU,MID,0,0,0
+Smith,ARS,MID,0,0,0
+Smith,BOU,DEF,74,5,7
+Smith,NFO,GKP,0,0,0
+Smith,WOL,GKP,0,0,0
+Smith Rowe,ARS,MID,18,0,0
+Smithies,LEI,GKP,0,0,0
+Solanke,BOU,FWD,130,14,8
+Solomon,FUL,MID,44,1,0
+Son,TOT,MID,152,8,9
+Soucek,WHU,MID,100,6,8
+Soumare,LEI,MID,41,0,6
+Sousa,ARS,DEF,0,0,0
+Souttar,LEI,DEF,20,0,1
+Spence,TOT,DEF,4,0,0
+Stacey,BOU,DEF,6,0,0
+Stanislas,BOU,MID,4,0,0
+Stansfield,FUL,FWD,7,0,0
+Steele,BHA,GKP,65,8,6
+Steffen,MCI,GKP,0,0,0
+Stephens,BOU,DEF,35,1,4
+Sterling,CHE,MID,101,9,5
+Stevens,BRE,DEF,0,0,0
+Stones,MCI,DEF,93,13,7
+Strakosha,BRE,GKP,0,0,0
+Struijk,LEE,DEF,66,4,4
+Summerville,LEE,MID,74,4,1
+Surridge,NFO,FWD,26,3,0
+Swinkels,AVL,DEF,0,0,0
+Tanganga,TOT,DEF,4,0,0
+Targett,NEW,DEF,35,2,3
+Tarkowski,EVE,DEF,106,13,9
+Tavares,ARS,DEF,0,0,0
+Tavernier,BOU,MID,94,12,5
+Tella,SOU,MID,0,0,0
+Telles,MUN,DEF,0,0,0
+Tete,LEI,MID,27,1,0
+Kenny Tete,FUL,DEF,90,1,7
+Thiago,LIV,MID,30,0,2
+Thiago Silva,CHE,DEF,80,8,6
+Thomas,LEI,DEF,28,0,2
+Thompson,BRE,DEF,0,0,0
+Tielemans,LEI,MID,86,6,6
+Tierney,ARS,DEF,37,0,1
+Toffolo,NFO,DEF,30,1,2
+Tomiyasu,ARS,DEF,32,0,2
+Tomkins,CRY,DEF,8,1,0
+Toney,BRE,FWD,182,35,10
+Torreira,ARS,MID,0,0,0
+Tosin,FUL,DEF,49,1,3
+Toti,WOL,DEF,43,4,4
+Townsend,EVE,MID,0,0,0
+Boubacar Traore,WOL,MID,14,0,0
+Bertrand Traore,AVL,MID,20,1,1
+Travers,BOU,GKP,28,1,2
+Trevitt,BRE,MID,0,0,0
+Trippier,NEW,DEF,198,39,16
+Trossard,ARS,MID,154,8,8
+Tsimikas,LIV,DEF,48,2,4
+Turner,ARS,GKP,0,0,0
+Turns,BHA,DEF,0,0,0
+Undav,BHA,FWD,52,4,2
+Vale,CHE,MID,0,0,0
+Valery,SOU,DEF,0,0,0
+van de Beek,MUN,MID,8,0,0
+Van den Berg,LIV,DEF,0,0,0
+van Dijk,LIV,DEF,127,13,11
+van Hecke,BHA,DEF,6,0,0
+Varane,MUN,DEF,77,2,10
+Vardy,LEI,FWD,82,4,4
+Veltman,BHA,DEF,95,6,10
+Vestergaard,LEI,DEF,0,0,0
+Vina,BOU,DEF,28,0,1
+Vinicius,FUL,FWD,72,10,1
+Vinagre,EVE,DEF,2,0,0
+Vlasic,WHU,MID,0,0,0
+Wesley Fofana,CHE,DEF,37,4,2
+Wober,LEE,DEF,25,2,2
+Wady,CHE,GKP,0,0,0
+Walcott,SOU,MID,49,1,2
+Walker,MCI,DEF,69,0,7
+Walker-Peters,SOU,DEF,56,2,3
+Walters,ARS,DEF,0,0,0
+Wan-Bissaka,MUN,DEF,67,3,8
+Joel Ward,CRY,DEF,78,5,8
+Danny Ward,LEI,GKP,91,12,6
+Ward-Prowse,SOU,MID,142,18,4
+Warrington,EVE,MID,0,0,0
+Watkins,AVL,FWD,175,25,13
+Webster,BHA,DEF,75,3,9
+Weghorst,MUN,FWD,24,0,4
+Welbeck,BHA,FWD,91,5,6
+Welch,EVE,DEF,0,0,0
+Wells-Morrison,CRY,MID,0,0,0
+Werner,CHE,FWD,0,0,0
+Ben White,ARS,DEF,156,12,15
+Harvey White,TOT,MID,1,0,0
+Whitworth,CRY,GKP,3,0,0
+Wickens,FUL,GKP,0,0,0
+Willian,FUL,MID,116,11,9
+Willock,NEW,MID,123,11,12
+Harry Wilson,FUL,MID,68,2,2
+Callum Wilson,NEW,FWD,157,20,10
+Wilson-Esbrand,MCI,DEF,0,0,0
+Winks,TOT,MID,0,0,0
+Wissa,BRE,MID,111,6,7
+Wood,NFO,FWD,53,7,4
+Wormleighton,LEI,DEF,0,0,0
+Worrall,NFO,DEF,61,2,5
+Wright,AVL,GKP,0,0,0
+Xande Silva,NFO,MID,0,0,0
+Xhaka,ARS,MID,153,15,13
+Yarmolyuk,BRE,MID,0,0,0
+Yates,NFO,MID,53,0,5
+Young,AVL,DEF,87,8,9
+Zabarnyi,BOU,DEF,7,0,0
+Zaha,CRY,MID,95,6,5
+Zakaria,CHE,MID,13,0,2
+Zanka,BRE,DEF,45,4,4
+Zemura,BOU,DEF,47,1,5
+Zinchenko,ARS,DEF,99,8,10
+Ziyech,CHE,MID,33,0,2
+Zouma,WHU,DEF,88,8,7
+Zych,AVL,GKP,0,0,0

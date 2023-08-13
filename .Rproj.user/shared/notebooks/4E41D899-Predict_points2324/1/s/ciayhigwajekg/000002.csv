@@ -1,0 +1,17 @@
+"0","mid <- trends %>% ungroup() %>% filter(Position==""MID"") %>%"
+"0","  select(where(~ !is.character(.x))) %>%"
+"0","  mutate_all(~ ifelse(is.na(.),0,.))"
+"0","one <- cor(mid) %>% data.frame() %>% select(c(""Points"")) %>%"
+"0","  filter(Points > 0.25 | Points < 0) %>% as.matrix()"
+"0","two <- row.names(one)"
+"0",""
+"0","m_rows <- two[3:74]"
+"0","quietly(gc())"
+"1","function (...) 
+"
+"1","capture_output(.f(...))
+"
+"1","<bytecode: 0x00000209f822d8e0>
+"
+"1","<environment: 0x0000020993083f50>
+"

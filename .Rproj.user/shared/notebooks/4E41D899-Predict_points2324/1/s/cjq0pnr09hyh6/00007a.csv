@@ -1,0 +1,9 @@
+"0","quietly(gc())"
+"1","function (...) 
+"
+"1","capture_output(.f(...))
+"
+"1","<bytecode: 0x00000209f822d8e0>
+"
+"1","<environment: 0x000002099b446d70>
+"

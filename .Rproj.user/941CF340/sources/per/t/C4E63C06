@@ -1,0 +1,28 @@
+{
+    "id": "C4E63C06",
+    "path": "~/FPL/Prediction Model/Predict_points2324.Rmd",
+    "project_path": "Predict_points2324.Rmd",
+    "type": "r_markdown",
+    "hash": "1031098154",
+    "contents": "",
+    "dirty": false,
+    "created": 1691887973347.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "chunk_output_type": "inline",
+        "source_window_id": "",
+        "Source": "Source",
+        "last_setup_crc32": "1183170Abb338d19",
+        "cursorPosition": "1925,17",
+        "scrollLine": "1911"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1691900965,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1691900965884,
+    "read_only": false,
+    "read_only_alternatives": []
+}

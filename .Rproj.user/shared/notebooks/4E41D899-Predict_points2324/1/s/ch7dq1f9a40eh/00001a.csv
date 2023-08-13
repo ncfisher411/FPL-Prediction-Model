@@ -1,0 +1,3 @@
+"0","temp <- data.frame(Goalkeeper_variables=gk_rows)"
+"0","temp <- kbl(temp) %>% kable_styling(bootstrap_options = c(""striped"", ""hover""))"
+"0","temp"

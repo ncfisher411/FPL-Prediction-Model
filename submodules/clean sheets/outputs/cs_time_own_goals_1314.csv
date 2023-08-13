@@ -1,0 +1,676 @@
+"player","clean_sheets","time_points","concede2","concede4","concede6","concede8","concede10","team_name","own_goals","Season"
+" Adrian",7,40,7,0,0,0,0,"West Ham",NA,2014
+" Anderson",1,6,2,1,0,0,0,"Manchester Utd",NA,2014
+" Cabral",0,2,0,0,0,0,0,"Sunderland",NA,2014
+" Chico",13,62,13,1,0,0,0,"Swansea City",1,2014
+" Fabio",5,26,4,2,1,0,0,"Cardiff City",NA,2014
+" Fabio",5,26,4,2,1,0,0,"Manchester Utd",NA,2014
+" Fernandinho",8,61,15,2,0,0,0,"Manchester City",NA,2014
+" Gedo",0,2,0,0,0,0,0,"Hull City",NA,2014
+" Lucas Leiva",4,33,6,1,0,0,0,"Liverpool",NA,2014
+" Michu",7,32,8,1,0,0,0,"Swansea City",NA,2014
+" Nani",1,14,5,1,0,0,0,"Manchester Utd",NA,2014
+" Oscar",9,51,8,0,0,0,0,"Chelsea",NA,2014
+" Paulinho",12,58,8,2,0,0,0,"Tottenham",NA,2014
+" Rafael",2,30,9,0,0,0,0,"Manchester Utd",NA,2014
+" Ramires",10,57,9,1,0,0,0,"Chelsea",NA,2014
+" Sandro",4,22,5,1,0,0,0,"Tottenham",1,2014
+" Willian",7,42,7,1,0,0,0,"Chelsea",NA,2014
+"Aaron Hughes",4,24,5,1,0,0,0,"Fulham",1,2014
+"Aaron Lennon",10,51,11,3,0,0,0,"Tottenham",NA,2014
+"Aaron McLean",0,1,0,0,0,0,0,"Hull City",NA,2014
+"Aaron Ramsey",7,41,10,0,0,0,0,"Arsenal",NA,2014
+"Aaron Wilbraham",0,4,0,0,0,0,0,"Crystal Palace",NA,2014
+"Abdoulaye Faye",2,6,0,0,0,0,0,"Hull City",NA,2014
+"Abou Diaby",0,1,1,0,0,0,0,"Arsenal",NA,2014
+"Adam Armstrong",0,4,1,0,0,0,0,"Newcastle Utd",NA,2014
+"Adam Johnson",9,60,13,2,0,0,0,"Sunderland",NA,2014
+"Adam King",0,0,0,0,0,0,0,"Swansea City",NA,2014
+"Adam Lallana",9,71,11,0,0,0,0,"Southampton",NA,2014
+"Adel Taarabt",1,19,7,2,0,0,0,"Fulham",NA,2014
+"Adlene Guedioura",1,10,2,0,0,0,0,"Crystal Palace",NA,2014
+"Adnan Januzaj",1,43,13,1,0,0,0,"Manchester Utd",NA,2014
+"Adrian Mariappa",11,48,8,1,0,0,0,"Crystal Palace",NA,2014
+"Ahmed El Mohamady",16,74,10,2,0,0,0,"Hull City",NA,2014
+"Aiden McGeady",0,18,5,0,0,0,0,"Everton",NA,2014
+"Alejandro Pozuelo",3,27,9,0,0,0,0,"Swansea City",NA,2014
+"Aleksandar Kolarov",7,49,12,2,0,0,0,"Manchester City",NA,2014
+"Aleksandar Tonev",1,20,5,0,0,0,0,"Aston Villa",NA,2014
+"Alex Bruce",7,37,6,2,0,0,0,"Hull City",NA,2014
+"Alex Kacaniklic",6,30,8,0,0,0,0,"Fulham",NA,2014
+"Alex Oxlade-Chamberlain",1,14,5,0,0,0,0,"Arsenal",NA,2014
+"Alex Pritchard",0,1,0,0,0,0,0,"Tottenham",NA,2014
+"Alexander Buettner",1,9,2,1,0,0,0,"Manchester Utd",NA,2014
+"Alexander Buttner",0,4,1,0,0,0,0,"Manchester Utd",NA,2014
+"Alexander Tettey",8,35,4,0,0,0,0,"Norwich City",NA,2014
+"Allan McGregor",12,50,7,2,0,0,0,"Hull City",NA,2014
+"Alou Diarra",0,4,1,0,0,0,0,"West Ham",NA,2014
+"Alvaro Negredo",6,44,11,1,0,0,0,"Manchester City",NA,2014
+"Alvaro Vazquez",3,15,3,0,0,0,0,"Swansea City",NA,2014
+"Aly Cissokho",3,25,5,2,1,0,0,"Liverpool",NA,2014
+"Anders Lindegaard",0,2,1,1,0,0,0,"Manchester Utd",NA,2014
+"Andre Schuerrle",1,2,0,0,0,0,0,"Chelsea",NA,2014
+"Andre Schurrle",5,34,10,1,0,0,0,"Chelsea",NA,2014
+"Andre Wisdom",0,3,1,0,0,0,0,"Liverpool",NA,2014
+"Andrea Dossena",2,13,2,1,0,0,0,"Sunderland",NA,2014
+"Andreas Cornelius",0,7,5,0,0,0,0,"Cardiff City",NA,2014
+"Andreas Weimann",8,64,14,1,0,0,0,"Aston Villa",NA,2014
+"Andrew Taylor",5,36,9,1,0,0,0,"Cardiff City",NA,2014
+"Andros Townsend",6,37,9,2,0,0,0,"Tottenham",NA,2014
+"Andy Carroll",6,28,5,0,0,0,0,"West Ham",NA,2014
+"Andy Wilkinson",2,7,0,0,0,0,0,"Stoke City",NA,2014
+"Angel Rangel",11,59,13,1,0,0,0,"Swansea City",NA,2014
+"Anthony Pilkington",4,20,2,0,0,0,0,"Norwich City",NA,2014
+"Antolin Alcaraz",2,11,1,0,0,0,0,"Everton",NA,2014
+"Antonio Luna",2,31,9,0,0,0,0,"Aston Villa",1,2014
+"Antonio Nocerino",0,12,4,0,0,0,0,"West Ham",NA,2014
+"Antonio Valencia",2,6,1,0,0,0,0,"Manchester Utd",NA,2014
+"Apostolos Vellios",0,0,0,0,0,0,0,"Everton",NA,2014
+"Aron Gunnarsson",6,38,8,0,0,0,0,"Cardiff City",NA,2014
+"Arouna Kone",0,5,1,0,0,0,0,"Everton",NA,2014
+"Artur Boruc",10,56,7,0,0,0,0,"Southampton",NA,2014
+"Ashkan Dejagah",4,31,10,2,0,0,0,"Fulham",NA,2014
+"Ashley Cole",7,33,5,0,0,0,0,"Chelsea",NA,2014
+"Ashley R. Westwood",11,64,12,0,0,0,0,"Aston Villa",NA,2014
+"Ashley Richards",0,0,0,0,0,0,0,"Swansea City",NA,2014
+"Ashley Westwood",1,6,1,1,0,0,0,"Aston Villa",NA,2014
+"Ashley Williams",12,68,14,1,0,0,0,"Swansea City",NA,2014
+"Ashley Young",3,26,6,1,0,0,0,"Manchester Utd",NA,2014
+"Asmir Begovic",14,64,5,1,0,0,0,"Stoke City",NA,2014
+"Bacary Sagna",13,69,13,0,0,0,0,"Arsenal",NA,2014
+"Barry Bannan",7,24,3,0,0,0,0,"Crystal Palace",NA,2014
+"Ben Amos",0,0,0,0,0,0,0,"Manchester Utd",NA,2014
+"Ben Davies",10,64,15,1,0,0,0,"Swansea City",NA,2014
+"Ben Foster",7,48,7,0,0,0,0,"West Brom",NA,2014
+"Ben Turner",13,61,11,0,0,0,0,"Cardiff City",NA,2014
+"Billy Jones",5,36,4,0,0,0,0,"West Brom",NA,2014
+"Bo-Kyung Kim",7,41,9,1,1,0,0,"Cardiff City",NA,2014
+"Boaz Myhill",4,28,6,0,0,0,0,"West Brom",NA,2014
+"Bony Wilfried",2,12,3,0,0,0,0,"Swansea City",NA,2014
+"Brad Friedel",0,2,0,0,0,0,0,"Tottenham",NA,2014
+"Brad Guzan",12,76,14,1,0,0,0,"Aston Villa",NA,2014
+"Brad Smith",0,1,0,0,0,0,0,"Liverpool",NA,2014
+"Bradley Johnson",13,58,6,0,0,0,0,"Norwich City",1,2014
+"Bradley Jones",0,0,0,0,0,0,0,"Liverpool",NA,2014
+"Branislav Ivanovic",16,70,9,1,0,0,0,"Chelsea",NA,2014
+"Brede Hangeland",7,40,9,1,0,0,0,"Fulham",NA,2014
+"Brek Shea",0,1,0,0,0,0,0,"Stoke City",NA,2014
+"Bryan Oviedo",1,17,2,0,0,0,0,"Everton",1,2014
+"Bryan Ruiz",4,20,5,1,0,0,0,"Fulham",NA,2014
+"Buomesca Tue Na Bangna",0,1,0,0,0,0,0,"Fulham",NA,2014
+"Callum Robinson",0,4,0,0,0,0,0,"Aston Villa",NA,2014
+"Calum Chambers",2,38,9,0,0,0,0,"Southampton",NA,2014
+"Cameron Jerome",8,42,6,0,0,0,0,"Crystal Palace",NA,2014
+"Cameron Jerome",8,42,6,0,0,0,0,"Stoke City",NA,2014
+"Carl Jenkinson",2,22,5,0,0,0,0,"Arsenal",NA,2014
+"Carlo Nash",0,0,0,0,0,0,0,"Norwich City",NA,2014
+"Carlos Cuellar",1,8,1,0,0,0,0,"Sunderland",NA,2014
+"Carlton Cole",1,27,7,0,0,0,0,"West Ham",NA,2014
+"Cauley Woodrow",2,9,3,0,0,0,0,"Fulham",NA,2014
+"Cesar Azpilicueta",9,55,10,1,0,0,0,"Chelsea",NA,2014
+"Charalampos Mavrias",0,5,2,0,0,0,0,"Sunderland",NA,2014
+"Charlie Adam",8,43,6,1,0,0,0,"Stoke City",NA,2014
+"Charlie Ward",0,0,0,0,0,0,0,"Stoke City",NA,2014
+"Cheick Tiote",2,4,0,0,0,0,0,"Newcastle Utd",NA,2014
+"Cheik Tiote",9,58,13,2,0,0,0,"Newcastle Utd",NA,2014
+"Chris Brunt",7,53,9,0,0,0,0,"West Brom",NA,2014
+"Chris David",0,2,1,0,0,0,0,"Fulham",NA,2014
+"Chris Herd",1,4,0,0,0,0,0,"Aston Villa",NA,2014
+"Chris Smalling",5,45,10,1,0,0,0,"Manchester Utd",NA,2014
+"Christian Benteke",7,48,12,1,0,0,0,"Aston Villa",NA,2014
+"Christian Eriksen",6,46,7,1,0,0,0,"Tottenham",NA,2014
+"Chu-Young Park",0,0,0,0,0,0,0,"Arsenal",NA,2014
+"Chuba Akpom",0,1,1,0,0,0,0,"Arsenal",NA,2014
+"Ciaran Clark",7,50,11,0,0,0,0,"Aston Villa",NA,2014
+"Claudio Yacob",4,45,10,0,0,0,0,"West Brom",NA,2014
+"Clint Dempsey",2,9,3,1,0,0,0,"Fulham",NA,2014
+"Cody Cropper",0,0,0,0,0,0,0,"Southampton",NA,2014
+"Connor Wickham",2,25,7,0,0,0,0,"Sunderland",NA,2014
+"Conor McAleny",0,0,0,0,0,0,0,"Everton",NA,2014
+"Costel Pantilimon",4,14,2,0,0,0,0,"Manchester City",1,2014
+"Craig Bellamy",7,35,9,1,1,0,0,"Cardiff City",NA,2014
+"Craig Dawson",3,22,4,0,0,0,0,"West Brom",NA,2014
+"Craig Gardner",3,23,9,1,0,0,0,"Sunderland",NA,2014
+"Craig Noone",4,30,8,1,0,0,0,"Cardiff City",NA,2014
+"Curtis Davies",15,74,10,2,0,0,0,"Hull City",NA,2014
+"Damien Delaney",15,72,10,1,0,0,0,"Crystal Palace",NA,2014
+"Damien Duff",3,20,6,2,0,0,0,"Fulham",NA,2014
+"Dan Gosling",2,12,3,2,0,0,0,"Newcastle Utd",NA,2014
+"Daniel Agger",5,34,7,1,1,0,0,"Liverpool",NA,2014
+"Daniel Alfei",0,0,0,0,0,0,0,"Swansea City",NA,2014
+"Daniel Burn",2,14,4,0,0,0,0,"Fulham",NA,2014
+"Daniel Fox",2,6,1,0,0,0,0,"Southampton",NA,2014
+"Daniel Gabbidon",12,45,3,0,0,0,0,"Crystal Palace",NA,2014
+"Daniel Graham",5,26,2,0,0,0,0,"Hull City",NA,2014
+"Daniel Johnson",0,0,0,0,0,0,0,"Aston Villa",NA,2014
+"Daniel Potts",0,0,0,0,0,0,0,"West Ham",NA,2014
+"Daniel Sturridge",6,55,15,2,1,0,0,"Liverpool",NA,2014
+"Danny Rose",9,44,6,1,0,0,0,"Tottenham",NA,2014
+"Danny Ward",0,0,0,0,0,0,0,"Liverpool",NA,2014
+"Danny Welbeck",4,37,10,1,0,0,0,"Manchester Utd",NA,2014
+"Darren Bent",4,35,12,3,0,0,0,"Fulham",NA,2014
+"Darren Fletcher",2,21,6,1,0,0,0,"Manchester Utd",NA,2014
+"Darron Gibson",0,1,0,0,0,0,0,"Everton",NA,2014
+"David Cornell",0,0,0,0,0,0,0,"Swansea City",NA,2014
+"David De Gea",9,74,16,1,0,0,0,"Manchester Utd",NA,2014
+"David Fox",0,0,0,0,0,0,0,"Norwich City",NA,2014
+"David Luiz",5,32,3,0,0,0,0,"Chelsea",NA,2014
+"David Marshall",15,74,14,2,1,0,0,"Cardiff City",NA,2014
+"David Meyler",7,45,9,2,0,0,0,"Hull City",NA,2014
+"David Moberg Karlsson",0,0,0,0,0,0,0,"Sunderland",NA,2014
+"David Ngog",0,3,1,0,0,0,0,"Swansea City",NA,2014
+"David Silva",9,53,11,2,0,0,0,"Manchester City",NA,2014
+"David Stockdale",7,40,9,1,0,0,0,"Fulham",1,2014
+"David Vaughan",0,3,1,0,0,0,0,"Sunderland",NA,2014
+"Davide Santon",6,49,11,2,0,0,0,"Newcastle Utd",NA,2014
+"Dean Moxey",7,36,4,1,0,0,0,"Crystal Palace",NA,2014
+"Declan John",9,36,7,2,1,0,0,"Cardiff City",NA,2014
+"Dedryck Boyata",0,0,0,0,0,0,0,"Manchester City",NA,2014
+"Dedryk Boyata",0,0,0,0,0,0,0,"Manchester City",NA,2014
+"Dejan Lovren",9,62,7,0,0,0,0,"Southampton",NA,2014
+"Demba Ba",1,24,8,1,0,0,0,"Chelsea",NA,2014
+"Derek Boateng",0,3,1,0,0,0,0,"Fulham",NA,2014
+"Diego Lugano",2,16,4,0,0,0,0,"West Brom",NA,2014
+"Dimitar Berbatov",7,36,7,2,0,0,0,"Fulham",NA,2014
+"Don Cowie",3,23,7,1,0,0,0,"Cardiff City",NA,2014
+"Donervon Daniels",0,0,0,0,0,0,0,"West Brom",NA,2014
+"Dong-Won Ji",0,5,1,0,0,0,0,"Sunderland",NA,2014
+"Dwight Gayle",1,28,7,1,0,0,0,"Crystal Palace",NA,2014
+"Dwight Tiendalli",3,17,4,0,0,0,0,"Swansea City",NA,2014
+"Eden Hazard",14,67,9,1,0,0,0,"Chelsea",NA,2014
+"Edin Dzeko",5,48,14,2,0,0,0,"Manchester City",NA,2014
+"El Hadji Ba",0,1,1,0,0,0,0,"Sunderland",NA,2014
+"El-Hadji Ba",0,0,0,0,0,0,0,"Sunderland",NA,2014
+"Eldin Jakupovic",0,2,0,0,0,0,0,"Hull City",NA,2014
+"Elliot Lee",0,1,0,0,0,0,0,"West Ham",NA,2014
+"Elliott Bennett",0,3,2,0,0,0,0,"Norwich City",NA,2014
+"Elliott Lee",0,0,0,0,0,0,0,"West Ham",NA,2014
+"Elsad Zverotic",3,9,2,0,0,0,0,"Fulham",NA,2014
+"Emanuele Giaccherini",5,36,7,1,0,0,0,"Sunderland",NA,2014
+"Emiliano Viviano",0,0,0,0,0,0,0,"Arsenal",NA,2014
+"Emmanuel Adebayor",8,41,6,2,0,0,0,"Tottenham",NA,2014
+"Emmanuel Frimpong",0,0,0,0,0,0,0,"Arsenal",NA,2014
+"Emmanuel Mayuka",0,0,0,0,0,0,0,"Southampton",NA,2014
+"Erik Lamela",1,12,3,0,0,0,0,"Tottenham",NA,2014
+"Erik Pieters",14,64,5,2,0,0,0,"Stoke City",NA,2014
+"Etienne Capoue",2,16,6,3,0,0,0,"Tottenham",NA,2014
+"Ezekiel Fryers",2,10,2,1,0,0,0,"Tottenham",NA,2014
+"Fabian Delph",10,66,11,1,0,0,0,"Aston Villa",1,2014
+"Fabio Borini",8,49,12,2,0,0,0,"Liverpool",NA,2014
+"Fabio Borini",8,49,12,2,0,0,0,"Sunderland",NA,2014
+"Fabio da Silva",0,0,0,0,0,0,0,"Manchester Utd",NA,2014
+"Fabricio Coloccini",12,54,8,1,0,0,0,"Newcastle Utd",NA,2014
+"Fernando Amorebieta",9,41,10,3,0,0,0,"Fulham",1,2014
+"Fernando Torres",7,45,8,1,0,0,0,"Chelsea",NA,2014
+"Florian Marange",0,0,0,0,0,0,0,"Crystal Palace",NA,2014
+"Fraizer Campbell",12,68,14,2,1,0,0,"Cardiff City",NA,2014
+"Frank Lampard",7,37,6,1,0,0,0,"Chelsea",NA,2014
+"Gabriel Agbonlahor",9,55,11,1,0,0,0,"Aston Villa",NA,2014
+"Gabriel Obertan",0,3,0,0,0,0,0,"Newcastle Utd",NA,2014
+"Gael Bigirimana",0,0,0,0,0,0,0,"Newcastle Utd",NA,2014
+"Gael Clichy",6,38,10,2,0,0,0,"Manchester City",NA,2014
+"Gareth Barry",12,64,10,0,0,0,0,"Everton",NA,2014
+"Gareth McAuley",9,64,12,0,0,0,0,"West Brom",1,2014
+"Gary Cahill",13,59,9,1,0,0,0,"Chelsea",NA,2014
+"Gary Gardner",0,0,0,0,0,0,0,"Aston Villa",NA,2014
+"Gary Hooper",8,52,6,0,0,0,0,"Norwich City",NA,2014
+"Gary Medel",14,64,11,1,1,0,0,"Cardiff City",NA,2014
+"Gaston Ramirez",0,21,7,0,0,0,0,"Southampton",NA,2014
+"Gedion Zelalem",0,0,0,0,0,0,0,"Arsenal",NA,2014
+"Geoff Cameron",14,72,7,2,0,0,0,"Stoke City",NA,2014
+"George Boyd",4,38,7,1,0,0,0,"Hull City",NA,2014
+"George McCartney",8,41,6,0,0,0,0,"West Ham",NA,2014
+"George Williams",0,0,0,0,0,0,0,"Fulham",NA,2014
+"Georgios Karagounis",2,19,5,1,0,0,0,"Fulham",NA,2014
+"Gerard Deulofeu",2,29,9,0,0,0,0,"Everton",NA,2014
+"Gerhard Tremmel",5,24,5,0,0,0,0,"Swansea City",NA,2014
+"Glen Johnson",4,56,14,3,1,0,0,"Liverpool",1,2014
+"Glenn Murray",1,17,6,0,0,0,0,"Crystal Palace",NA,2014
+"Glenn Whelan",11,56,6,2,0,0,0,"Stoke City",NA,2014
+"Goran Popov",0,3,2,0,0,0,0,"West Brom",NA,2014
+"Graham Dorrans",5,26,5,0,0,0,0,"West Brom",NA,2014
+"Grant Holt",1,13,5,1,0,0,0,"Aston Villa",NA,2014
+"Gregor Zabret",0,0,0,0,0,0,0,"Swansea City",NA,2014
+"Guilherme Do Prado",0,9,2,0,0,0,0,"Southampton",NA,2014
+"Guy Demel",12,59,10,0,0,0,0,"West Ham",1,2014
+"Gylfi Sigurdsson",5,37,9,1,0,0,0,"Tottenham",NA,2014
+"Haris Vuckic",0,0,0,0,0,0,0,"Newcastle Utd",NA,2014
+"Harrison Reed",0,4,0,0,0,0,0,"Southampton",NA,2014
+"Harry Kane",1,14,2,0,0,0,0,"Tottenham",1,2014
+"Harry Winks",0,0,0,0,0,0,0,"Tottenham",NA,2014
+"Hatem Ben Arfa",5,38,12,2,0,0,0,"Newcastle Utd",NA,2014
+"Hector Bellerin",0,0,0,0,0,0,0,"Arsenal",NA,2014
+"Henrique Hilario",0,0,0,0,0,0,0,"Chelsea",NA,2014
+"Heurelho Gomes",0,0,0,0,0,0,0,"Tottenham",NA,2014
+"Hiram Boateng",0,0,0,0,0,0,0,"Crystal Palace",NA,2014
+"Hugo Lloris",15,74,13,3,0,0,0,"Tottenham",NA,2014
+"Hugo Rodallega",2,19,5,1,0,0,0,"Fulham",NA,2014
+"Iago Aspas",3,17,4,0,0,0,0,"Liverpool",NA,2014
+"Ignacio Scocco",0,6,2,0,0,0,0,"Sunderland",NA,2014
+"Isaac Hayden",0,0,0,0,0,0,0,"Arsenal",NA,2014
+"Jack Butland",1,5,1,1,0,0,0,"Stoke City",NA,2014
+"Jack Colback",7,52,12,2,0,0,0,"Sunderland",NA,2014
+"Jack Collison",1,12,4,0,0,0,0,"West Ham",NA,2014
+"Jack Cork",3,47,10,0,0,0,0,"Southampton",NA,2014
+"Jack Grealish",0,1,0,0,0,0,0,"Aston Villa",NA,2014
+"Jack Rodwell",1,6,3,0,0,0,0,"Manchester City",NA,2014
+"Jack Wilshere",5,41,9,0,0,0,0,"Arsenal",NA,2014
+"Jacob Butterfield",0,0,0,0,0,0,0,"Norwich City",NA,2014
+"Jak Alnwick",0,0,0,0,0,0,0,"Newcastle Utd",NA,2014
+"Jake Livermore",14,69,10,2,0,0,0,"Hull City",NA,2014
+"Jamar Loza",0,1,1,0,0,0,0,"Norwich City",NA,2014
+"James Chester",10,42,8,2,0,0,0,"Hull City",1,2014
+"James Collins",10,42,7,0,0,0,0,"West Ham",NA,2014
+"James McCarthy",11,65,11,0,0,0,0,"Everton",NA,2014
+"James Milner",6,43,14,1,0,0,0,"Manchester City",NA,2014
+"James Morrison",7,52,10,0,0,0,0,"West Brom",NA,2014
+"James Tavernier",0,0,0,0,0,0,0,"Newcastle Utd",NA,2014
+"James Tomkins",12,56,10,0,0,0,0,"West Ham",NA,2014
+"James Ward-Prowse",0,3,0,0,0,0,0,"Southampton",NA,2014
+"James Wilson",0,2,0,0,0,0,0,"Manchester Utd",NA,2014
+"Jamie Ness",0,0,0,0,0,0,0,"Stoke City",NA,2014
+"Jamie Ward-Prowse",5,44,8,0,0,0,0,"Southampton",NA,2014
+"Jan Vertonghen",10,44,6,1,0,0,0,"Tottenham",NA,2014
+"Janoi Donacien",0,0,0,0,0,0,0,"Aston Villa",NA,2014
+"Jason Puncheon",13,62,9,1,0,0,0,"Crystal Palace",NA,2014
+"Javi Garcia",4,41,14,1,0,0,0,"Manchester City",NA,2014
+"Javier Garrido",4,12,1,0,0,0,0,"Norwich City",NA,2014
+"Javier Hernandez",0,27,9,1,0,0,0,"Manchester Utd",NA,2014
+"Jay Fulton",0,3,1,0,0,0,0,"Swansea City",NA,2014
+"Jay Rodriguez",5,59,11,0,0,0,0,"Southampton",NA,2014
+"Jed Steer",0,0,0,0,0,0,0,"Aston Villa",NA,2014
+"Jermain Defoe",0,17,6,0,0,0,0,"Tottenham",NA,2014
+"Jermaine Pennant",0,8,0,0,0,0,0,"Stoke City",NA,2014
+"Jerome Thomas",2,10,3,1,0,0,0,"Crystal Palace",NA,2014
+"Jesse Joronen",0,0,0,0,0,0,0,"Fulham",NA,2014
+"Jesse Lingard",0,0,0,0,0,0,0,"Manchester Utd",NA,2014
+"Jesus Navas",6,44,12,2,0,0,0,"Manchester City",NA,2014
+"Jimmy Kebe",1,6,1,0,0,0,0,"Crystal Palace",NA,2014
+"Jo Inge Berget",0,1,1,1,0,0,0,"Cardiff City",NA,2014
+"Joao Carlos",0,1,1,0,0,0,0,"Liverpool",NA,2014
+"Joe Allen",0,36,11,2,1,0,0,"Liverpool",NA,2014
+"Joe Cole",2,25,5,0,0,0,0,"West Ham",NA,2014
+"Joe Hart",9,62,14,2,0,0,0,"Manchester City",NA,2014
+"Joe Ledley",0,2,1,0,0,0,0,"Crystal Palace",NA,2014
+"Joe Lewis",0,2,0,0,0,0,0,"Cardiff City",NA,2014
+"Joe Mason",0,0,0,0,0,0,0,"Cardiff City",NA,2014
+"Joel Robles",0,4,0,0,0,0,0,"Everton",NA,2014
+"Joel Ward",15,72,9,1,0,0,0,"Crystal Palace",NA,2014
+"Joey O'Brien",2,6,0,0,0,0,0,"West Ham",NA,2014
+"Joey O´Brien",5,24,6,0,0,0,0,"West Ham",NA,2014
+"Johan Elmander",7,40,3,0,0,0,0,"Norwich City",NA,2014
+"John Arne Riise",4,33,10,2,0,0,0,"Fulham",NA,2014
+"John Flanagan",3,40,11,1,0,0,0,"Liverpool",NA,2014
+"John Guidetti",0,6,1,0,0,0,0,"Manchester City",NA,2014
+"John Guidetti",0,6,1,0,0,0,0,"Stoke City",NA,2014
+"John O'Shea",6,34,7,0,0,0,0,"Sunderland",NA,2014
+"John Obi Mikel",5,32,9,1,0,0,0,"Chelsea",NA,2014
+"John O´Shea",7,32,5,2,0,0,0,"Sunderland",NA,2014
+"John Ruddy",18,76,7,0,0,0,0,"Norwich City",NA,2014
+"John Stones",6,36,7,0,0,0,0,"Everton",NA,2014
+"John Swift",0,1,1,0,0,0,0,"Chelsea",NA,2014
+"John Terry",15,68,9,1,0,0,0,"Chelsea",1,2014
+"Johnny Heitinga",3,29,7,0,0,0,0,"Everton",NA,2014
+"Johnny Heitinga",3,29,7,0,0,0,0,"Fulham",NA,2014
+"Joleon Lescott",5,18,2,0,0,0,0,"Manchester City",NA,2014
+"Jon Flanagan",0,2,1,1,1,0,0,"Liverpool",NA,2014
+"Jonas Gutierrez",1,7,1,0,0,0,0,"Newcastle Utd",NA,2014
+"Jonas Gutierrez",1,7,1,0,0,0,0,"Norwich City",NA,2014
+"Jonas Olsson",9,62,11,0,0,0,0,"West Brom",1,2014
+"Jonathan De Guzman",9,51,13,0,0,0,0,"Swansea City",NA,2014
+"Jonathan Howson",8,48,6,0,0,0,0,"Norwich City",NA,2014
+"Jonathan Parr",4,22,4,0,0,0,0,"Crystal Palace",NA,2014
+"Jonathan Walters",8,51,6,1,0,0,0,"Stoke City",NA,2014
+"Jonathan Williams",0,8,0,0,0,0,0,"Crystal Palace",NA,2014
+"Jonathan de Guzman",1,5,1,0,0,0,0,"Swansea City",NA,2014
+"Jonjo Shelvey",11,57,15,1,0,0,0,"Swansea City",NA,2014
+"Jonny Evans",3,30,8,0,0,0,0,"Manchester Utd",NA,2014
+"Jordan Bowery",0,8,2,0,0,0,0,"Aston Villa",1,2014
+"Jordan Henderson",7,70,14,3,1,0,0,"Liverpool",NA,2014
+"Jordan Ibe",0,1,0,0,0,0,0,"Liverpool",NA,2014
+"Jordan Pickford",0,0,0,0,0,0,0,"Sunderland",NA,2014
+"Jordan Rossiter",0,0,0,0,0,0,0,"Liverpool",NA,2014
+"Jordi Amat",5,31,5,0,0,0,0,"Swansea City",NA,2014
+"Jordon Ibe",0,0,0,0,0,0,0,"Liverpool",NA,2014
+"Jordon Mutch",7,52,12,1,1,0,0,"Cardiff City",NA,2014
+"Jores Okore",0,3,1,0,0,0,0,"Aston Villa",NA,2014
+"Jos Hooiveld",1,6,1,0,0,0,0,"Southampton",1,2014
+"Jose Campana",0,4,2,1,0,0,0,"Crystal Palace",NA,2014
+"Jose Canas",5,41,11,1,0,0,0,"Swansea City",NA,2014
+"Jose Enrique",2,14,2,0,0,0,0,"Liverpool",NA,2014
+"Jose Fonte",0,8,1,0,0,0,0,"Southampton",NA,2014
+"Jose Miguel Fonte",10,63,9,0,0,0,0,"Southampton",NA,2014
+"Joseph Bennett",2,8,2,0,0,0,0,"Aston Villa",NA,2014
+"Joseph Ledley",4,26,5,0,0,0,0,"Crystal Palace",NA,2014
+"Joseph Yobo",4,16,1,0,0,0,0,"Norwich City",NA,2014
+"Josh Murphy",0,9,2,0,0,0,0,"Norwich City",NA,2014
+"Josh Passley",0,0,0,0,0,0,0,"Fulham",NA,2014
+"Jozy Altidore",5,48,12,2,0,0,0,"Sunderland",NA,2014
+"Juan Cala",2,14,2,2,1,0,0,"Cardiff City",NA,2014
+"Juan Mata",6,48,11,2,0,0,0,"Chelsea",NA,2014
+"Juan Mata",6,48,11,2,0,0,0,"Manchester Utd",NA,2014
+"Julian Speroni",16,74,9,1,0,0,0,"Crystal Palace",NA,2014
+"Jussi Jaaskelainen",9,36,5,0,0,0,0,"West Ham",NA,2014
+"Jussi Jaeaeskelaeinen",0,0,0,0,0,0,0,"West Ham",NA,2014
+"Kagisho Dikgacoi",10,43,4,0,0,0,0,"Crystal Palace",NA,2014
+"Karim El Ahmadi",9,53,11,1,0,0,0,"Aston Villa",NA,2014
+"Kelvin Davis",0,4,1,0,0,0,0,"Southampton",NA,2014
+"Kemar Roofe",0,0,0,0,0,0,0,"West Brom",NA,2014
+"Kenwyne Jones",2,26,3,2,1,0,0,"Cardiff City",NA,2014
+"Kenwyne Jones",2,26,3,2,1,0,0,"Stoke City",NA,2014
+"Kevin De Bruyne",0,0,0,0,0,0,0,"Chelsea",NA,2014
+"Kevin McNaughton",2,8,1,0,0,0,0,"Cardiff City",NA,2014
+"Kevin Mirallas",11,58,9,0,0,0,0,"Everton",NA,2014
+"Kevin Nolan",14,64,10,0,0,0,0,"West Ham",NA,2014
+"Kevin Phillips",0,4,1,1,0,0,0,"Crystal Palace",NA,2014
+"Kevin Theophile Catherine",5,30,6,0,0,0,0,"Cardiff City",NA,2014
+"Kevin Theophile-Catherine",3,24,5,1,1,0,0,"Cardiff City",NA,2014
+"Kevin de Bruyne",2,5,0,0,0,0,0,"Chelsea",NA,2014
+"Kieran Gibbs",8,50,11,0,0,0,0,"Arsenal",NA,2014
+"Kieran Richardson",8,53,14,2,0,0,0,"Fulham",NA,2014
+"Kieren Westwood",2,18,3,0,0,0,0,"Sunderland",NA,2014
+"Kim Kaellstroem",0,4,1,0,0,0,0,"Arsenal",NA,2014
+"Kolo Toure",3,35,8,1,0,0,0,"Liverpool",NA,2014
+"Konstantinos Mitroglou",0,4,0,0,0,0,0,"Fulham",NA,2014
+"Kyle Bartley",0,3,2,0,0,0,0,"Swansea City",NA,2014
+"Kyle Naughton",7,39,8,3,0,0,0,"Tottenham",NA,2014
+"Kyle Walker",8,50,11,3,0,0,0,"Tottenham",NA,2014
+"Lacina Traore",0,1,1,0,0,0,0,"Everton",NA,2014
+"Larnell Cole",0,1,1,0,0,0,0,"Fulham",NA,2014
+"Lasse Vigen Christensen",0,0,0,0,0,0,0,"Fulham",NA,2014
+"Laurent Koscielny",12,60,10,0,0,0,0,"Arsenal",NA,2014
+"Leandro Bacuna",10,62,13,1,0,0,0,"Aston Villa",NA,2014
+"Lee Camp",0,0,0,0,0,0,0,"West Brom",NA,2014
+"Lee Cattermole",6,39,8,1,0,0,0,"Sunderland",NA,2014
+"Lee Lucas",0,0,0,0,0,0,0,"Swansea City",NA,2014
+"Leighton Baines",13,62,11,0,0,0,0,"Everton",NA,2014
+"Leo Chambers",0,0,0,0,0,0,0,"West Ham",NA,2014
+"Leon Britton",9,46,11,1,0,0,0,"Swansea City",NA,2014
+"Leon Osman",8,50,11,0,0,0,0,"Everton",NA,2014
+"Leroy Fer",15,57,4,0,0,0,0,"Norwich City",NA,2014
+"Leroy Lita",0,2,0,0,0,0,0,"Swansea City",NA,2014
+"Lewis Baker",0,0,0,0,0,0,0,"Chelsea",NA,2014
+"Lewis Holtby",4,38,13,2,0,0,0,"Fulham",NA,2014
+"Lewis Holtby",4,38,13,2,0,0,0,"Tottenham",NA,2014
+"Lewis Price",0,0,0,0,0,0,0,"Crystal Palace",NA,2014
+"Liam Agnew",0,0,0,0,0,0,0,"Sunderland",NA,2014
+"Liam Bridcutt",2,21,4,0,0,0,0,"Sunderland",NA,2014
+"Liam O'Neil",0,3,2,0,0,0,0,"West Brom",NA,2014
+"Liam Ridgewell",8,64,11,0,0,0,0,"West Brom",NA,2014
+"Liam Rosenior",10,46,8,2,0,0,0,"Hull City",NA,2014
+"Libor Kozak",2,23,6,0,0,0,0,"Aston Villa",NA,2014
+"Lloyd Isgrove",0,0,0,0,0,0,0,"Southampton",NA,2014
+"Loic Remy",7,50,10,1,0,0,0,"Newcastle Utd",NA,2014
+"Lubomir Satka",0,0,0,0,0,0,0,"Newcastle Utd",NA,2014
+"Lucas Leiva",1,12,6,1,0,0,0,"Liverpool",NA,2014
+"Luciano Becchio",0,4,0,0,0,0,0,"Norwich City",NA,2014
+"Luis Alberto",0,9,2,1,0,0,0,"Liverpool",NA,2014
+"Luis Antonio Valencia",5,43,12,2,0,0,0,"Manchester Utd",NA,2014
+"Luis Suarez",5,66,16,3,1,0,0,"Liverpool",NA,2014
+"Lukas Podolski",6,32,7,0,0,0,0,"Arsenal",NA,2014
+"Lukasz Fabianski",0,2,1,0,0,0,0,"Arsenal",NA,2014
+"Luke Daniels",0,1,0,0,0,0,0,"West Brom",NA,2014
+"Luke Garbutt",0,1,0,0,0,0,0,"Everton",NA,2014
+"Luke Shaw",7,64,10,0,0,0,0,"Southampton",NA,2014
+"Luuk de Jong",2,14,6,3,0,0,0,"Newcastle Utd",NA,2014
+"Maarten Stekelenburg",6,38,9,2,0,0,0,"Fulham",NA,2014
+"Magaye Gueye",0,0,0,0,0,0,0,"Everton",NA,2014
+"Magnus Wolff Eikrem",0,7,3,1,0,0,0,"Cardiff City",NA,2014
+"Mahamadou Diarra",1,8,2,0,0,0,0,"Fulham",NA,2014
+"Mamadou Sakho",1,35,10,2,1,0,0,"Liverpool",NA,2014
+"Mapou Yanga-Mbiwa",6,36,8,1,0,0,0,"Newcastle Utd",NA,2014
+"Marc Albrighton",2,27,4,1,0,0,0,"Aston Villa",NA,2014
+"Marc Muniesa",2,22,4,1,0,0,0,"Stoke City",NA,2014
+"Marc Wilson",11,61,6,2,0,0,0,"Stoke City",NA,2014
+"Marco Borriello",0,2,1,0,0,0,0,"West Ham",NA,2014
+"Marco van Ginkel",0,2,0,0,0,0,0,"Chelsea",NA,2014
+"Marcos Alonso",5,32,7,1,0,0,0,"Sunderland",NA,2014
+"Marcos Lopes",0,0,0,0,0,0,0,"Manchester City",NA,2014
+"Marcus Bettinelli",0,0,0,0,0,0,0,"Fulham",NA,2014
+"Mark Bunn",0,0,0,0,0,0,0,"Norwich City",NA,2014
+"Mark Hudson",1,4,1,0,0,0,0,"Cardiff City",NA,2014
+"Mark Noble",16,74,12,0,0,0,0,"West Ham",NA,2014
+"Mark Schwarzer",1,8,3,0,0,0,0,"Chelsea",NA,2014
+"Marko Arnautovic",10,49,6,2,0,0,0,"Stoke City",NA,2014
+"Markus Rosenberg",1,3,1,0,0,0,0,"West Brom",NA,2014
+"Marouane Chamakh",12,56,10,1,0,0,0,"Crystal Palace",NA,2014
+"Marouane Fellaini",2,34,10,1,0,0,0,"Everton",NA,2014
+"Marouane Fellaini",2,34,10,1,0,0,0,"Manchester Utd",NA,2014
+"Martin Demichelis",9,54,12,2,0,0,0,"Manchester City",NA,2014
+"Martin Kelly",0,5,0,0,0,0,0,"Liverpool",NA,2014
+"Martin Olsson",15,67,7,0,0,0,0,"Norwich City",NA,2014
+"Martin Skrtel",6,72,17,3,1,0,0,"Liverpool",NA,2014
+"Marvin Emnes",0,5,3,0,0,0,0,"Swansea City",NA,2014
+"Mason Springthorpe",0,0,0,0,0,0,0,"Everton",NA,2014
+"Massadio Haidara",1,14,2,1,0,0,0,"Newcastle Utd",NA,2014
+"Matej Vydra",0,28,6,0,0,0,0,"West Brom",NA,2014
+"Mathieu Debuchy",10,56,10,2,0,0,0,"Newcastle Utd",1,2014
+"Mathieu Flamini",6,40,10,0,0,0,0,"Arsenal",1,2014
+"Matija Nastasic",4,22,4,1,0,0,0,"Manchester City",NA,2014
+"Mats Moller Daehli",1,18,5,2,1,0,0,"Cardiff City",NA,2014
+"Matt Fryatt",0,10,4,0,0,0,0,"Hull City",NA,2014
+"Matt Jarvis",0,4,1,0,0,0,0,"West Ham",NA,2014
+"Matt Targett",0,0,0,0,0,0,0,"Southampton",NA,2014
+"Matthew Briggs",0,3,0,0,0,0,0,"Fulham",NA,2014
+"Matthew Connolly",2,6,1,0,0,0,0,"Cardiff City",NA,2014
+"Matthew Etherington",3,16,2,0,0,0,0,"Stoke City",NA,2014
+"Matthew Jarvis",11,47,8,0,0,0,0,"West Ham",NA,2014
+"Matthew Lowton",4,39,8,0,0,0,0,"Aston Villa",NA,2014
+"Matthew Taylor",6,36,8,0,0,0,0,"West Ham",NA,2014
+"Maya Yoshida",0,15,6,0,0,0,0,"Southampton",NA,2014
+"Maynor Figueroa",13,60,7,2,0,0,0,"Hull City",NA,2014
+"Mesut Ozil",10,51,10,0,0,0,0,"Arsenal",NA,2014
+"Micah Richards",1,4,1,0,0,0,0,"Manchester City",NA,2014
+"Michael Carrick",8,55,12,1,0,0,0,"Manchester Utd",NA,2014
+"Michael Dawson",15,64,10,2,0,0,0,"Tottenham",NA,2014
+"Michael Essien",0,0,0,0,0,0,0,"Chelsea",NA,2014
+"Michael Keane",0,0,0,0,0,0,0,"Manchester Utd",NA,2014
+"Michael Turner",9,42,6,0,0,0,0,"Norwich City",NA,2014
+"Michel Vorm",9,52,11,1,0,0,0,"Swansea City",NA,2014
+"Mickael Essien",0,5,3,0,0,0,0,"Chelsea",NA,2014
+"Mike Williamson",12,64,11,3,0,0,0,"Newcastle Utd",1,2014
+"Mikel Arteta",12,58,8,0,0,0,0,"Arsenal",1,2014
+"Mile Jedinak",16,74,10,1,0,0,0,"Crystal Palace",NA,2014
+"Milos Veljkovic",0,2,0,0,0,0,0,"Tottenham",NA,2014
+"Mladen Petric",0,3,2,0,0,0,0,"West Ham",NA,2014
+"Modibo Diakite",1,14,2,0,0,0,0,"Sunderland",NA,2014
+"Modibo Maiga",5,23,3,0,0,0,0,"West Ham",NA,2014
+"Mohamed Diame",11,57,9,0,0,0,0,"West Ham",NA,2014
+"Mohamed Salah",1,14,3,0,0,0,0,"Chelsea",NA,2014
+"Morgan Amalfitano",8,51,11,0,0,0,0,"West Brom",NA,2014
+"Morgan Schneiderlin",8,61,9,0,0,0,0,"Southampton",NA,2014
+"Mousa Dembele",2,4,0,0,0,0,0,"Tottenham",NA,2014
+"Moussa Dembele",6,38,12,3,0,0,0,"Fulham",NA,2014
+"Moussa Dembele",6,38,12,3,0,0,0,"Tottenham",NA,2014
+"Moussa Sissoko",14,66,12,2,0,0,0,"Newcastle Utd",NA,2014
+"Muamer Tankovic",0,2,2,0,0,0,0,"Fulham",NA,2014
+"Nabil Bentaleb",5,26,6,2,0,0,0,"Tottenham",NA,2014
+"Nacer Chadli",4,40,10,2,0,0,0,"Tottenham",NA,2014
+"Nacho Monreal",7,34,9,0,0,0,0,"Arsenal",NA,2014
+"Nathan Ake",0,1,1,0,0,0,0,"Chelsea",NA,2014
+"Nathan Baker",10,55,12,1,0,0,0,"Aston Villa",1,2014
+"Nathan Dyer",7,41,10,1,0,0,0,"Swansea City",NA,2014
+"Nathan Redmond",10,57,7,0,0,0,0,"Norwich City",NA,2014
+"Nathaniel Clyne",8,40,6,0,0,0,0,"Southampton",NA,2014
+"Neil Alexander",0,0,0,0,0,0,0,"Crystal Palace",NA,2014
+"Neil Etheridge",0,0,0,0,0,0,0,"Fulham",NA,2014
+"Neil Taylor",3,16,3,0,0,0,0,"Swansea City",NA,2014
+"Nemanja Matic",8,32,4,0,0,0,0,"Chelsea",NA,2014
+"Nemanja Vidic",6,47,9,1,0,0,0,"Manchester Utd",NA,2014
+"Nick Maynard",0,8,2,0,0,0,0,"Cardiff City",NA,2014
+"Nick Proschwitz",0,2,0,0,0,0,0,"Hull City",NA,2014
+"Nicklas Bendtner",1,10,2,0,0,0,0,"Arsenal",NA,2014
+"Nicklas Helenius",0,3,1,0,0,0,0,"Aston Villa",NA,2014
+"Nicolas Anelka",3,21,3,0,0,0,0,"West Brom",NA,2014
+"Nikica Jelavic",8,42,9,2,0,0,0,"Everton",NA,2014
+"Nikica Jelavic",8,42,9,2,0,0,0,"Hull City",NA,2014
+"Olivier Giroud",13,72,13,0,0,0,0,"Arsenal",NA,2014
+"Ondrej Celustka",6,35,7,1,0,0,0,"Sunderland",NA,2014
+"Oscar Ustari",0,0,0,0,0,0,0,"Sunderland",NA,2014
+"Oussama Assaidi",7,29,2,0,0,0,0,"Stoke City",NA,2014
+"Owen Garvan",0,3,0,0,0,0,0,"Crystal Palace",NA,2014
+"Pablo Armero",0,8,2,0,0,0,0,"West Ham",NA,2014
+"Pablo Hernandez",3,36,9,1,0,0,0,"Swansea City",NA,2014
+"Pablo Osvaldo",3,20,1,0,0,0,0,"Southampton",NA,2014
+"Pablo Zabaleta",11,68,14,1,0,0,0,"Manchester City",NA,2014
+"Pajtim Kasami",7,45,13,3,0,0,0,"Fulham",NA,2014
+"Papiss Cisse",7,34,9,2,0,0,0,"Newcastle Utd",NA,2014
+"Papiss Demba Cisse",1,3,0,0,0,0,0,"Newcastle Utd",NA,2014
+"Patrice Evra",8,64,15,2,0,0,0,"Manchester Utd",NA,2014
+"Patrick McCarthy",0,1,0,0,0,0,0,"Crystal Palace",NA,2014
+"Patrick Roberts",0,2,1,0,0,0,0,"Fulham",NA,2014
+"Paul Dummett",6,27,7,2,0,0,0,"Newcastle Utd",NA,2014
+"Paul McShane",3,15,2,0,0,0,0,"Hull City",NA,2014
+"Paulo Gazzaniga",0,15,3,0,0,0,0,"Southampton",NA,2014
+"Per Mertesacker",14,70,11,0,0,0,0,"Arsenal",NA,2014
+"Peter Crouch",13,62,7,2,0,0,0,"Stoke City",NA,2014
+"Peter Odemwingie",7,48,9,1,0,0,0,"Cardiff City",NA,2014
+"Peter Odemwingie",7,48,9,1,0,0,0,"Stoke City",NA,2014
+"Peter Ramage",0,0,0,0,0,0,0,"Crystal Palace",NA,2014
+"Peter Whittingham",13,60,11,0,0,0,0,"Cardiff City",NA,2014
+"Petr Cech",15,68,8,1,0,0,0,"Chelsea",NA,2014
+"Phil Bardsley",1,2,0,0,0,0,0,"Sunderland",NA,2014
+"Phil Jagielka",10,52,8,0,0,0,0,"Everton",NA,2014
+"Phil Jones",5,46,12,2,0,0,0,"Manchester Utd",NA,2014
+"Philippe Coutinho",6,53,15,3,1,0,0,"Liverpool",NA,2014
+"Philippe Senderos",4,22,5,3,0,0,0,"Fulham",NA,2014
+"Phillip Bardsley",8,48,9,2,0,0,0,"Sunderland",NA,2014
+"Raheem Sterling",3,55,16,3,1,0,0,"Liverpool",NA,2014
+"Ravel Morrison",6,28,5,0,0,0,0,"West Ham",NA,2014
+"Razvan Rat",4,26,7,0,0,0,0,"West Ham",NA,2014
+"Rhys Healey",0,1,1,0,0,0,0,"Cardiff City",NA,2014
+"Ricardo Vaz Te",0,7,3,0,0,0,0,"West Ham",NA,2014
+"Rickie Lambert",10,68,10,0,0,0,0,"Southampton",NA,2014
+"Ricky van Wolfswinkel",10,39,5,0,0,0,0,"Norwich City",NA,2014
+"Rio Ferdinand",4,26,6,1,0,0,0,"Manchester Utd",NA,2014
+"Robert Brady",4,23,2,0,0,0,0,"Hull City",NA,2014
+"Robert Elliot",1,4,1,1,0,0,0,"Newcastle Utd",NA,2014
+"Robert Huth",5,24,2,0,0,0,0,"Stoke City",NA,2014
+"Robert Koren",5,30,6,1,0,0,0,"Hull City",NA,2014
+"Robert Snodgrass",14,57,5,0,0,0,0,"Norwich City",NA,2014
+"Roberto Soldado",9,48,8,2,0,0,0,"Tottenham",NA,2014
+"Robin van Persie",6,39,9,1,0,0,0,"Manchester Utd",NA,2014
+"Roger Johnson",0,7,3,0,0,0,0,"West Ham",NA,2014
+"Roland Lamah",0,12,6,0,0,0,0,"Swansea City",NA,2014
+"Romelu Lukaku",7,59,10,0,0,0,0,"Chelsea",NA,2014
+"Romelu Lukaku",7,59,10,0,0,0,0,"Everton",NA,2014
+"Ron Vlaar",11,62,12,1,0,0,0,"Aston Villa",NA,2014
+"Rory Donnelly",0,0,0,0,0,0,0,"Swansea City",NA,2014
+"Ross Barkley",6,52,11,0,0,0,0,"Everton",NA,2014
+"Rudy Gestede",0,3,0,0,0,0,0,"Cardiff City",NA,2014
+"Russell Martin",14,60,5,0,0,0,0,"Norwich City",NA,2014
+"Ryan Bennett",6,30,2,0,0,0,0,"Norwich City",NA,2014
+"Ryan Bertrand",6,34,5,1,0,0,0,"Aston Villa",NA,2014
+"Ryan Bertrand",6,34,5,1,0,0,0,"Chelsea",NA,2014
+"Ryan Fredericks",0,0,0,0,0,0,0,"Tottenham",NA,2014
+"Ryan Giggs",2,16,4,1,0,0,0,"Manchester Utd",NA,2014
+"Ryan Inniss",0,0,0,0,0,0,0,"Crystal Palace",NA,2014
+"Ryan Ledson",0,0,0,0,0,0,0,"Everton",NA,2014
+"Ryan Shawcross",16,74,7,2,0,0,0,"Stoke City",1,2014
+"Ryan Shotton",0,0,0,0,0,0,0,"Stoke City",NA,2014
+"Ryan Tunnicliffe",0,5,3,0,0,0,0,"Fulham",NA,2014
+"Ryo Miyaichi",0,1,0,0,0,0,0,"Arsenal",NA,2014
+"Saido Berahino",5,44,9,0,0,0,0,"West Brom",NA,2014
+"Sam Gallagher",1,21,7,0,0,0,0,"Southampton",NA,2014
+"Sam Johnstone",0,0,0,0,0,0,0,"Manchester Utd",NA,2014
+"Samir Nasri",9,63,14,1,0,0,0,"Manchester City",NA,2014
+"Sammy Ameobi",2,11,3,1,0,0,0,"Newcastle Utd",NA,2014
+"Samuel Eto'o",4,18,2,0,0,0,0,"Chelsea",NA,2014
+"Samuel Eto´o",3,17,3,0,0,0,0,"Chelsea",NA,2014
+"San Miguel del Castillo Adrian",0,0,0,0,0,0,0,"West Ham",NA,2014
+"Santi Cazorla",1,2,0,0,0,0,0,"Arsenal",NA,2014
+"Santiago Cazorla",13,57,9,0,0,0,0,"Arsenal",NA,2014
+"Santiago Vergini",2,22,5,0,0,0,0,"Sunderland",NA,2014
+"Sascha Riether",8,59,15,3,0,0,0,"Fulham",1,2014
+"Scott Dann",4,28,6,0,0,0,0,"Crystal Palace",NA,2014
+"Scott Parker",8,52,14,3,0,0,0,"Fulham",NA,2014
+"Scott Sinclair",1,7,2,0,0,0,0,"West Brom",NA,2014
+"Seamus Coleman",13,72,12,0,0,0,0,"Everton",NA,2014
+"Sebastian Larsson",11,55,11,2,0,0,0,"Sunderland",NA,2014
+"Sebastien Bassong",14,52,3,0,0,0,0,"Norwich City",NA,2014
+"Serge Gnabry",1,15,5,0,0,0,0,"Arsenal",NA,2014
+"Sergio Aguero",7,35,10,1,0,0,0,"Manchester City",NA,2014
+"Shane Long",8,51,11,2,0,0,0,"Hull City",NA,2014
+"Shane Long",8,51,11,2,0,0,0,"West Brom",NA,2014
+"Shinji Kagawa",4,28,9,1,0,0,0,"Manchester Utd",NA,2014
+"Shola Ameobi",7,40,6,1,0,0,0,"Newcastle Utd",NA,2014
+"Simon Mignolet",7,76,17,3,1,0,0,"Liverpool",NA,2014
+"Simon Moore",0,0,0,0,0,0,0,"Cardiff City",NA,2014
+"Sone Aluko",6,27,6,1,0,0,0,"Hull City",NA,2014
+"Stephane Sessegnon",9,51,10,0,0,0,0,"Sunderland",NA,2014
+"Stephane Sessegnon",9,51,10,0,0,0,0,"West Brom",NA,2014
+"Stephen Dobbie",0,2,0,0,0,0,0,"Crystal Palace",NA,2014
+"Stephen Ireland",5,36,5,1,0,0,0,"Stoke City",NA,2014
+"Stephen Quinn",1,19,5,1,0,0,0,"Hull City",NA,2014
+"Stevan Jovetic",2,15,5,1,0,0,0,"Manchester City",NA,2014
+"Steve Harper",4,25,4,0,0,0,0,"Hull City",NA,2014
+"Steve Sidwell",13,72,17,3,0,0,0,"Fulham",NA,2014
+"Steven Caulker",15,76,14,2,1,0,0,"Cardiff City",NA,2014
+"Steven Davis",6,60,11,0,0,0,0,"Southampton",NA,2014
+"Steven Fletcher",6,31,6,2,0,0,0,"Sunderland",NA,2014
+"Steven Gerrard",6,65,16,2,1,0,0,"Liverpool",NA,2014
+"Steven Naismith",8,44,11,0,0,0,0,"Everton",NA,2014
+"Steven Nzonzi",15,70,7,2,0,0,0,"Stoke City",NA,2014
+"Steven Pienaar",9,40,5,0,0,0,0,"Everton",NA,2014
+"Steven Reid",2,28,8,0,0,0,0,"West Brom",NA,2014
+"Steven Taylor",4,19,4,1,0,0,0,"Newcastle Utd",NA,2014
+"Steven Whittaker",9,36,5,0,0,0,0,"Norwich City",NA,2014
+"Stewart Downing",12,59,9,0,0,0,0,"West Ham",NA,2014
+"Stuart O'Keefe",0,4,1,0,0,0,0,"Crystal Palace",NA,2014
+"Stuart O´Keefe",0,11,1,1,0,0,0,"Crystal Palace",NA,2014
+"Sung-Yueng Ki",8,51,12,3,0,0,0,"Sunderland",NA,2014
+"Sung-Yueng Ki",8,51,12,3,0,0,0,"Swansea City",NA,2014
+"Sylvain Distin",10,64,11,0,0,0,0,"Everton",NA,2014
+"Sylvain Marveaux",2,11,4,1,0,0,0,"Newcastle Utd",NA,2014
+"Tadanari Lee",0,0,0,0,0,0,0,"Southampton",NA,2014
+"Theo Walcott",3,21,6,0,0,0,0,"Arsenal",NA,2014
+"Thievy Bifouma",1,7,2,0,0,0,0,"West Brom",NA,2014
+"Thomas Carroll",0,0,0,0,0,0,0,"Tottenham",NA,2014
+"Thomas Ince",1,11,4,0,0,0,0,"Crystal Palace",NA,2014
+"Thomas James",0,1,1,0,0,0,0,"Cardiff City",NA,2014
+"Thomas Lawrence",0,2,0,0,0,0,0,"Manchester Utd",NA,2014
+"Thomas Sorensen",1,6,1,0,0,0,0,"Stoke City",NA,2014
+"Thomas Vermaelen",4,22,4,0,0,0,0,"Arsenal",NA,2014
+"Tiago Ilori",0,0,0,0,0,0,0,"Liverpool",NA,2014
+"Tim Howard",14,74,12,0,0,0,0,"Everton",1,2014
+"Tim Krul",14,72,13,2,0,0,0,"Newcastle Utd",NA,2014
+"Tom Cleverley",4,36,11,1,0,0,0,"Manchester Utd",NA,2014
+"Tom Huddlestone",14,71,10,2,0,0,0,"Hull City",NA,2014
+"Tom Lawrence",0,0,0,0,0,0,0,"Manchester Utd",NA,2014
+"Tomas Kalas",0,4,2,0,0,0,0,"Chelsea",NA,2014
+"Tomas Rosicky",8,43,5,0,0,0,0,"Arsenal",NA,2014
+"Tommy Smith",0,0,0,0,0,0,0,"Cardiff City",NA,2014
+"Tony Hibbert",0,1,0,0,0,0,0,"Everton",NA,2014
+"Tyias Browning",0,0,0,0,0,0,0,"Everton",NA,2014
+"Valentin Roberge",1,16,3,0,0,0,0,"Sunderland",NA,2014
+"Victor Anichebe",3,35,9,0,0,0,0,"Everton",NA,2014
+"Victor Anichebe",3,35,9,0,0,0,0,"West Brom",NA,2014
+"Victor Moses",0,25,9,1,0,0,0,"Liverpool",NA,2014
+"Victor Wanyama",8,38,3,0,0,0,0,"Southampton",NA,2014
+"Vincent Kompany",6,54,14,2,0,0,0,"Manchester City",1,2014
+"Vito Mannone",10,57,11,2,0,0,0,"Sunderland",NA,2014
+"Vlad Chiriches",6,32,8,1,0,0,0,"Tottenham",NA,2014
+"Vurnon Anita",11,59,12,3,0,0,0,"Newcastle Utd",NA,2014
+"Wayne Hennessey",0,2,1,0,0,0,0,"Crystal Palace",NA,2014
+"Wayne Rooney",6,56,16,1,0,0,0,"Manchester Utd",NA,2014
+"Wayne Routledge",11,65,15,1,0,0,0,"Swansea City",NA,2014
+"Wes Brown",10,48,10,2,0,0,0,"Sunderland",1,2014
+"Wesley Hoolahan",2,23,2,0,0,0,0,"Norwich City",NA,2014
+"Wilfried Bony",6,48,11,0,0,0,0,"Swansea City",NA,2014
+"Wilfried Zaha",3,17,5,2,1,0,0,"Cardiff City",NA,2014
+"Wilfried Zaha",3,17,5,2,1,0,0,"Manchester Utd",NA,2014
+"William Kvist",2,15,4,0,0,0,0,"Fulham",NA,2014
+"Wilson Palacios",1,19,4,1,0,0,0,"Stoke City",NA,2014
+"Winston Reid",9,40,6,0,0,0,0,"West Ham",NA,2014
+"Wojciech Szczesny",15,74,12,0,0,0,0,"Arsenal",NA,2014
+"Yacouba Sylla",2,14,7,1,0,0,0,"Aston Villa",NA,2014
+"Yannick Bolasie",10,51,8,1,0,0,0,"Crystal Palace",NA,2014
+"Yannick Sagbo",8,43,4,0,0,0,0,"Hull City",NA,2014
+"Yaya Sanogo",0,8,4,0,0,0,0,"Arsenal",NA,2014
+"Yaya Toure",12,68,15,2,0,0,0,"Manchester City",NA,2014
+"Yoan Gouffran",9,60,13,3,0,0,0,"Newcastle Utd",NA,2014
+"Yohan Cabaye",3,36,8,0,0,0,0,"Newcastle Utd",NA,2014
+"Younes Kaboul",4,24,3,1,0,0,0,"Tottenham",NA,2014
+"Youssouf Mulumbu",1,6,2,0,0,0,0,"West Brom",NA,2014
+"Youssuf Mulumbu",9,64,10,0,0,0,0,"West Brom",NA,2014
+"Zoltan Gera",0,17,4,0,0,0,0,"West Brom",NA,2014
